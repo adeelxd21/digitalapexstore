@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO OPTIMIZATION START -->
+    <title>Digital Apex | Premium Accounts & Virtual Numbers Store</title>
+    <meta name="description" content="Buy CapCut Pro, ChatGPT Plus, Netflix, Canva Admin, and Virtual Numbers (OTP) at the best prices. Instant Delivery via Digital Apex.">
+    <meta name="keywords" content="Digital Apex, CapCut Pro, Virtual Numbers, OTP Buy, Netflix Account, Cheap Subscriptions, Canva Admin Panel, GitHub Student Pack">
+    <meta name="author" content="Digital Apex">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph for Social Media -->
+    <meta property="og:title" content="Digital Apex - Premium Store">
+    <meta property="og:description" content="Get Premium Tools & Numbers Instantly. Trusted Service.">
+    <meta property="og:image" content="logo.png">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="logo.png">
+    
+    <!-- Icons & Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CSS VARIABLES --- */
+        :root {
+            --bg-body: #0b0f19;
+            --bg-card: #151b2b;
+            --primary: #00dc82; 
+            --accent: #36e4da;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --border: #1e293b;
+            --input-bg: #0f141f;
+            /* Instagram Gradient */
+            --insta-grad: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.5;
+            background-image: radial-gradient(circle at top right, rgba(0, 220, 130, 0.05), transparent 40%);
+        }
+
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+
+        /* --- PROFESSIONAL NAVBAR --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 5%;
+            background: rgba(11, 15, 25, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(15px);
+            height: 100px;
+        }
+
+        /* Center Logo Logic */
+        .logo-container {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .logo img {
+            height: 150px; /* Big Size Maintained */
+            vertical-align: middle;
+            filter: drop-shadow(0 0 10px rgba(0, 220, 130, 0.2));
+            transition: transform 0.3s ease;
+        }
+        .logo img:hover { transform: scale(1.05); }
+
+        /* Right Side Buttons Container */
+        .nav-actions {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Button Styles */
+        .nav-btn {
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid transparent;
+        }
+
+        /* WhatsApp Button */
+        .btn-wa {
+            background: rgba(0, 220, 130, 0.1);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        .btn-wa:hover {
+            background: var(--primary);
+            color: #000;
+            box-shadow: 0 0 15px rgba(0, 220, 130, 0.3);
+        }
+
+        /* Instagram Button */
+        .btn-insta {
+            background: rgba(255,255,255,0.05);
+            color: #fff;
+            border-color: rgba(255,255,255,0.2);
+        }
+        .btn-insta:hover {
+            background: var(--insta-grad);
+            border-color: transparent;
+            box-shadow: 0 0 15px rgba(220, 39, 67, 0.4);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                height: auto;
+                gap: 15px;
+                padding: 15px;
+            }
+            .logo-container { position: static; transform: none; }
+            .nav-actions { margin: 0 auto; }
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            text-align: center;
+            padding: 60px 20px 40px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        .hero h1 span { color: var(--accent); }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 550px;
+            margin: 0 auto 30px;
+        }
+
+        /* --- FEATURES --- */
+        .features-strip {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 15px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            background: rgba(21, 27, 43, 0.5);
+            margin-bottom: 40px;
+        }
+        .feature-item {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .feature-item i { color: var(--primary); }
+
+        /* --- LAYOUT --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+        }
+
+        .section-header {
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-line {
+            height: 30px;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        .section-header h2 { font-size: 1.8rem; font-weight: 700; color: #fff; }
+        .section-header p { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* --- GRID --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        /* --- CARDS --- */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            opacity: 0;
+            transition: 0.3s;
+        }
+        .card:hover::after { opacity: 1; }
+
+        .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 71, 87, 0.15);
+            color: #ff4757;
+            font-size: 0.7rem;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(255, 71, 87, 0.3);
+        }
+
+        .badge.best-seller { 
+            background: rgba(0, 220, 130, 0.15); 
+            color: var(--primary); 
+            border-color: rgba(0, 220, 130, 0.3);
+        }
+
+        .card-top {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            color: var(--text-main);
+        }
+        
+        .card h3 { font-size: 1.25rem; font-weight: 700; line-height: 1.2; }
+        .card ul { list-style: none; margin-bottom: 20px; flex-grow: 1; }
+        .card ul li { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 8px; display: flex; align-items: center; }
+        .card ul li i { color: var(--primary); margin-right: 10px; font-size: 0.8rem; }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: auto;
+        }
+
+        .price-tag { font-size: 1.6rem; font-weight: 800; color: #fff; }
+        .price-tag span { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; }
+
+        .buy-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            border: 1px solid var(--primary);
+            text-align: center;
+            min-width: 100px;
+        }
+        .buy-btn:hover {
+            background: #00b368;
+            border-color: #00b368;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 220, 130, 0.4);
+        }
+
+        /* --- VIRTUAL NUMBERS --- */
+        .country-bar {
+            background: var(--bg-card);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            border: 1px solid var(--border);
+        }
+        
+        .country-flag {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            background: rgba(0,0,0,0.3);
+            padding: 6px 15px;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            cursor: default;
+        }
+
+        .app-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+        .app-grid .card { padding: 20px; align-items: center; text-align: center; }
+        .app-grid .icon-box { font-size: 2rem; background: transparent; margin-bottom: 10px; color: var(--primary); }
+        .app-grid h4 { margin-bottom: 15px; font-size: 1.1rem; }
+
+        /* --- CONTACT FORM SECTION --- */
+        .contact-section {
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; color: var(--text-muted); margin-bottom: 8px; font-size: 0.9rem; }
+        .form-control {
+            width: 100%;
+            background: var(--input-bg);
+            border: 1px solid var(--border);
+            padding: 12px;
+            border-radius: 6px;
+            color: #fff;
+            outline: none;
+            transition: 0.3s;
+        }
+        .form-control:focus { border-color: var(--primary); }
+        .submit-btn {
+            width: 100%;
+            background: var(--primary);
+            color: #000;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+        .submit-btn:hover { background: #00b368; }
+
+        /* Success Message Box */
+        .success-message {
+            display: none; /* Hidden by default */
+            text-align: center;
+            padding: 30px;
+            background: rgba(0, 220, 130, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 12px;
+            color: #fff;
+        }
+        .success-message i { font-size: 3rem; color: var(--primary); margin-bottom: 15px; }
+        .success-message h3 { margin-bottom: 10px; color: var(--primary); }
+
+        /* --- MODAL (Privacy/Terms) Styles --- */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 2000; 
+            left: 0; top: 0; width: 100%; height: 100%; 
+            background-color: rgba(0,0,0,0.8); 
+            backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            background-color: var(--bg-card);
+            margin: 10% auto;
+            padding: 40px;
+            border: 1px solid var(--primary);
+            width: 80%;
+            max-width: 600px;
+            border-radius: 12px;
+            color: var(--text-muted);
+            position: relative;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover { color: #fff; }
+        .modal h2 { color: #fff; margin-bottom: 15px; }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #080b12;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            margin-top: 60px;
+        }
+        .footer-logo { display: block; margin: 0 auto 15px auto; height: 60px; }
+        .footer-links a { color: var(--text-muted); margin: 0 10px; font-size: 0.9rem; cursor: pointer; }
+        .footer-links a:hover { color: var(--primary); }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .grid { grid-template-columns: 1fr; }
+            .modal-content { width: 95%; margin: 20% auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <!-- Logo Centered -->
+        <div class="logo-container">
+            <div class="logo">
+                <img src="logo.png" alt="Digital Apex Logo">
+            </div>
+        </div>
+
+        <!-- Right Side Buttons -->
+        <div class="nav-actions">
+            <!-- Instagram Button -->
+            <a href="https://instagram.com/digital.apex0" target="_blank" class="nav-btn btn-insta">
+                <i class="fa-brands fa-instagram"></i> Instagram
+            </a>
+            
+            <!-- WhatsApp Button -->
+            <a href="https://wa.me/12832219723" target="_blank" class="nav-btn btn-wa">
+                <i class="fa-brands fa-whatsapp"></i> Support
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Welcome to <br> <span>DIGITAL APEX</span></h1>
+        <p>Premium Digital Tools, Accounts & Virtual Numbers. Instant Delivery.</p>
+        
+        <div class="features-strip">
+            <div class="feature-item"><i class="fa-solid fa-bolt"></i> Fast</div>
+            <div class="feature-item"><i class="fa-solid fa-shield-halved"></i> Secure</div>
+            <div class="feature-item"><i class="fa-solid fa-check-circle"></i> Reliable</div>
+        </div>
+    </section>
+
+    <div class="container">
+
+        <!-- PREMIUM SUBSCRIPTIONS -->
+        <div class="section-header">
+            <div class="section-line"></div>
+            <div>
+                <h2>Premium Subscriptions</h2>
+                <p>Best prices for top-tier accounts.</p>
+            </div>
+        </div>
+
+        <div class="grid">
+            
+            <!-- CapCut 1 Month -->
+            <div class="card">
+                <div class="card-top">
+                    <div class="icon-box"><i class="fa-solid fa-scissors"></i></div>
+                    <h3>CapCut Pro</h3>
+                </div>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> 1 Month Access</li>
+                    <li><i class="fa-solid fa-check"></i> Private Account</li>
+                </ul>
+                <div class="price-row">
+                    <div class="price-tag">$1.00 <span>/mo</span></div>
+                    <a href="https://wa.me/12832219723?text=Hi%20Digital%20Apex,%20I%20want%20CapCut%201%20Month." class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+
+            <!-- CapCut 6 Month -->
+            <div class="card" style="border-color: var(--primary); background: linear-gradient(to bottom right, #151b2b, rgba(0,220,130,0.05));">
+                <span class="badge best-seller">Best Deal</span>
+                <div class="card-top">
+                    <div class="icon-box" style="color: var(--primary);"><i class="fa-solid fa-film"></i></div>
+                    <h3>CapCut Pro</h3>
+                </div>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> 6 Months Validity</li>
+                    <li><i class="fa-solid fa-check"></i> Full Warranty</li>
+                    <li><i class="fa-solid fa-check"></i> Premium Features</li>
+                </ul>
+                <div class="price-row">
+                    <div class="price-tag" style="color: var(--primary);">$5.00</div>
+                    <a href="https://wa.me/12832219723?text=Hi%20Digital%20Apex,%20I%20want%20CapCut%206%20Months." class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+
+            <!-- Amazon Prime Video -->
+            <div class="card">
+                <span class="badge">New</span>
+                <div class="card-top">
+                    <div class="icon-box" style="color: #00a8e1;"><i class="fa-brands fa-amazon"></i></div>
+                    <h3>Prime Video</h3>
+                </div>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> 6 Months Plan</li>
+                    <li><i class="fa-solid fa-check"></i> Private Profile</li>
+                    <li><i class="fa-solid fa-check"></i> 4K UHD Support</li>
+                </ul>
+                <div class="price-row">
+                    <div class="price-tag">$6.00</div>
+                    <a href="https://wa.me/12832219723?text=Hi%20Digital%20Apex,%20I%20want%20Amazon%20Prime%20Video%206%20Months." class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+
+            <!-- GitHub Edu -->
+            <div class="card">
+                <div class="card-top">
+                    <div class="icon-box"><i class="fa-brands fa-github"></i></div>
+                    <h3>GitHub Edu</h3>
+                </div>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> Student Pack</li>
+                    <li><i class="fa-solid fa-check"></i> Copilot Access</li>
+                    <li><i class="fa-solid fa-check"></i> DigitalOcean Credit</li>
+                </ul>
+                <div class="price-row">
+                    <div class="price-tag">$5.00</div>
+                    <a href="https://wa.me/12832219723?text=Hi%20Digital%20Apex,%20I%20want%20GitHub%20Student%20Panel." class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+
+            <!-- Canva Admin -->
+            <div class="card">
+                <div class="card-top">
+                    <div class="icon-box" style="color: #00c4cc;"><i class="fa-solid fa-palette"></i></div>
+                    <h3>Canva Admin</h3>
+                </div>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> Admin Panel</li>
+                    <li><i class="fa-solid fa-check"></i> Add 500 Members</li>
+                    <li><i class="fa-solid fa-check"></i> Lifetime Warranty</li>
+                </ul>
+                <div class="price-row">
+                    <div class="price-tag">$7.00</div>
+                    <a href="https://wa.me/12832219723?text=Hi%20Digital%20Apex,%20I%20want%20Canva%20Admin%20Panel." class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+
+            <!-- ChatGPT -->
+            <div class="card">
+                <span class="badge">Hot</span>
+                <div class="card-top">
+                    <div class="icon-box" style="color: #10a37f;"><i class="fa-solid fa-robot"></i></div>
+                    <h3>ChatGPT Plus</h3>
+                </div>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> GPT-5.3 Model</li>
+                    <li><i class="fa-solid fa-check"></i> DALL·E 3 Access</li>
+                </ul>
+                <div class="price-row">
+                    <div class="price-tag">$10.00</div>
+                    <a href="https://wa.me/12832219723?text=Hi%20Digital%20Apex,%20I%20want%20ChatGPT%20Plus." class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+            
+             <!-- Netflix -->
+             <div class="card">
+                <div class="card-top">
+                    <!-- Netflix Logo Ensured -->
+                    <div class="icon-box" style="color: #e50914;"><i class="fa-brands fa-netflix"></i></div>
+                    <h3>Netflix</h3>
+                </div>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> 1 Month Shared</li>
+                    <li><i class="fa-solid fa-check"></i> Premium Ultra HD</li>
+                </ul>
+                <div class="price-row">
+                    <div class="price-tag">$3.00</div>
+                    <a href="https://wa.me/12832219723?text=Hi%20Digital%20Apex,%20I%20want%20Netflix%204K." class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+
+             <!-- LinkedIn -->
+             <div class="card">
+                <div class="card-top">
+                    <div class="icon-box" style="color: #0077b5;"><i class="fa-brands fa-linkedin"></i></div>
+                    <h3>LinkedIn Premium</h3>
+                </div>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> 12 Month Career Plan</li>
+                    <li><i class="fa-solid fa-check"></i> Career Insights</li>
+                </ul>
+                <div class="price-row">
+                    <div class="price-tag">$15.00</div>
+                    <a href="https://wa.me/12832219723?text=Hi%20Digital%20Apex,%20I%20want%20LinkedIn%20Premium%20Career%20Plan." class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- SPACER -->
+        <div style="height: 50px;"></div>
+
+        <!-- VIRTUAL NUMBERS -->
+        <div class="section-header">
+            <div class="section-line" style="background: var(--accent);"></div>
+            <div>
+                <h2>Virtual Numbers (OTP)</h2>
+                <p>Non-VoIP numbers for verification.</p>
+            </div>
+        </div>
+
+        <!-- Country Bar -->
+        <div class="country-bar">
+            <span class="country-flag">🇺🇸 USA</span>
+            <span class="country-flag">🇬🇧 UK</span>
+            <span class="country-flag">🇨🇦 Canada</span>
+            <span class="country-flag">🇦🇺 Australia</span>
+            <span class="country-flag">🇩🇪 Germany</span>
+            <span class="country-flag">🇫🇷 France</span>
+            <span class="country-flag">🌎 150+ More</span>
+        </div>
+
+        <div class="grid app-grid">
+            <!-- Telegram -->
+            <div class="card">
+                <i class="fa-brands fa-telegram icon-box" style="color: #0088cc;"></i>
+                <h4>Telegram</h4>
+                <a href="https://wa.me/12832219723?text=Digital%20Apex:%20I%20need%20Telegram%20Number" class="buy-btn">Buy Now</a>
+            </div>
+
+            <!-- WhatsApp -->
+            <div class="card">
+                <i class="fa-brands fa-whatsapp icon-box" style="color: #25d366;"></i>
+                <h4>WhatsApp</h4>
+                <a href="https://wa.me/12832219723?text=Digital%20Apex:%20I%20need%20WhatsApp%20Number" class="buy-btn">Buy Now</a>
+            </div>
+
+            <!-- Google -->
+            <div class="card">
+                <i class="fa-brands fa-google icon-box" style="color: #fff;"></i>
+                <h4>Google</h4>
+                <a href="https://wa.me/12832219723?text=Digital%20Apex:%20I%20need%20Google%20Number" class="buy-btn">Buy Now</a>
+            </div>
+
+            <!-- Facebook -->
+            <div class="card">
+                <i class="fa-brands fa-facebook icon-box" style="color: #1877f2;"></i>
+                <h4>Facebook</h4>
+                <a href="https://wa.me/12832219723?text=Digital%20Apex:%20I%20need%20Facebook%20Number" class="buy-btn">Buy Now</a>
+            </div>
+
+            <!-- PayPal -->
+            <div class="card">
+                <i class="fa-brands fa-paypal icon-box" style="color: #00457c;"></i>
+                <h4>PayPal</h4>
+                <a href="https://wa.me/12832219723?text=Digital%20Apex:%20I%20need%20PayPal%20Number" class="buy-btn">Buy Now</a>
+            </div>
+
+            <!-- Amazon -->
+            <div class="card">
+                <i class="fa-brands fa-amazon icon-box" style="color: #ff9900;"></i>
+                <h4>Amazon</h4>
+                <a href="https://wa.me/12832219723?text=Digital%20Apex:%20I%20need%20Amazon%20Number" class="buy-btn">Buy Now</a>
+            </div>
+
+             <!-- TikTok -->
+             <div class="card">
+                <i class="fa-brands fa-tiktok icon-box" style="color: #fe2c55;"></i>
+                <h4>TikTok</h4>
+                <a href="https://wa.me/12832219723?text=Digital%20Apex:%20I%20need%20TikTok%20Number" class="buy-btn">Buy Now</a>
+            </div>
+            
+            <!-- Tinder -->
+            <div class="card">
+                <i class="fa-brands fa-fire icon-box" style="color: #fe3c72;"></i>
+                <h4>Tinder</h4>
+                <a href="https://wa.me/12832219723?text=Digital%20Apex:%20I%20need%20Tinder%20Number" class="buy-btn">Buy Now</a>
+            </div>
+        </div>
+        
+        <div style="height: 60px;"></div>
+
+        <!-- CONTACT US FORM (FIXED: NO REDIRECT) -->
+        <div class="section-header">
+            <div class="section-line" style="background: #fff;"></div>
+            <div><h2>Contact Us</h2><p>Send us a direct message via Email.</p></div>
+        </div>
+
+        <div class="contact-section">
+            <!-- Hidden Success Message -->
+            <div class="success-message" id="formSuccessMessage">
+                <i class="fa-solid fa-circle-check"></i>
+                <h3>Thank You!</h3>
+                <p>Your message has been sent successfully. We will contact you shortly.</p>
+            </div>
+
+            <!-- Form -->
+            <form id="contactForm">
+                <!-- IMPORTANT: FormSubmit Endpoint for AJAX -->
+                <input type="hidden" name="_subject" value="New Inquiry from Digital Apex Website">
+                <!-- No _next here because we handle it with JS -->
+
+                <div class="grid" style="gap: 15px;">
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" name="name" class="form-control" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Your Email</label>
+                        <input type="email" name="email" class="form-control" placeholder="email@example.com" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea name="message" rows="5" class="form-control" placeholder="How can we help you?" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn" id="submitBtn">Send Message</button>
+            </form>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <img src="logo.png" alt="Digital Apex Logo" class="footer-logo">
+        <p>© 2026 DIGITAL APEX. All rights reserved.</p>
+        <div class="footer-links" style="margin-top: 20px;">
+            <a onclick="document.getElementById('privacyModal').style.display='block'">Privacy Policy</a> | 
+            <a onclick="document.getElementById('termsModal').style.display='block'">Terms of Service</a>
+        </div>
+    </footer>
+
+    <!-- PRIVACY POLICY MODAL -->
+    <div id="privacyModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="document.getElementById('privacyModal').style.display='none'">&times;</span>
+            <h2>Privacy Policy</h2>
+            <p>At Digital Apex, your privacy is our priority.</p><br>
+            <p>1. <strong>Data Collection:</strong> We do not collect personal data other than what you provide for order delivery (e.g., email or phone number).</p>
+            <p>2. <strong>Security:</strong> All accounts and numbers provided are secure and private.</p>
+            <p>3. <strong>Sharing:</strong> We do not share your information with third parties.</p>
+            <p>4. <strong>Payments:</strong> All payments are processed securely via encrypted channels.</p>
+        </div>
+    </div>
+
+    <!-- TERMS MODAL -->
+    <div id="termsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="document.getElementById('termsModal').style.display='none'">&times;</span>
+            <h2>Terms of Service</h2>
+            <p>By purchasing from Digital Apex, you agree to the following:</p><br>
+            <p>1. <strong>Warranty:</strong> Warranties are valid only for the duration specified on the product card.</p>
+            <p>2. <strong>Delivery:</strong> Delivery is instant or within 24 hours depending on stock availability.</p>
+            <p>3. <strong>Refunds:</strong> Refunds are only provided if the product is non-functional and cannot be replaced.</p>
+            <p>4. <strong>Usage:</strong> Any misuse of the accounts provided will result in warranty voidance.</p>
+        </div>
+    </div>
+
+    <!-- JS for Modals & Form Handling -->
+    <script>
+        // Modal Logic
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('privacyModal')) {
+                document.getElementById('privacyModal').style.display = "none";
+            }
+            if (event.target == document.getElementById('termsModal')) {
+                document.getElementById('termsModal').style.display = "none";
+            }
+        }
+
+        // AJAX Form Logic (Prevents Redirect)
+        const form = document.getElementById('contactForm');
+        const successMessage = document.getElementById('formSuccessMessage');
+        const submitBtn = document.getElementById('submitBtn');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Stop standard submission
+            
+            // Show Loading State
+            submitBtn.innerText = "Sending...";
+            submitBtn.style.opacity = "0.7";
+
+            // Prepare Data as JSON (Crucial for FormSubmit AJAX)
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+            const json = JSON.stringify(data);
+
+            // Send to FormSubmit via AJAX with proper headers
+            fetch("https://formsubmit.co/ajax/adeel126304@gmail.com", {
+                method: "POST",
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            })
+            .then(response => response.json())
+            .then(data => {
+                // On Success: Hide Form, Show Message
+                form.style.display = "none";
+                successMessage.style.display = "block";
+                console.log(data);
+            })
+            .catch(error => {
+                // Error Fallback
+                console.error('Error:', error);
+                submitBtn.innerText = "Error. Try again.";
+            });
+        });
+    </script>
+
+</body>
+</html>
