@@ -25,9 +25,10 @@
         :root {
             /* Professional Tech Dark Theme */
             --bg-body: #0B1120;
-            --bg-nav: rgba(11, 17, 32, 0.95);
+            --bg-nav: rgba(11, 17, 32, 0.85);
             --bg-card: #1E293B;
             --bg-card-hover: #334155;
+            --bg-sidebar: #111827;
             
             --primary: #3B82F6; 
             --primary-hover: #2563EB;
@@ -38,16 +39,18 @@
             --border: rgba(148, 163, 184, 0.15);
             
             --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.15);
             --input-bg: #0f172a;
             --input-text: #fff;
         }
 
         /* --- LIGHT MODE VARIABLES --- */
         body.light-mode {
-            --bg-body: #F1F5F9;
-            --bg-nav: rgba(255, 255, 255, 0.95);
+            --bg-body: #F8FAFC;
+            --bg-nav: rgba(255, 255, 255, 0.85);
             --bg-card: #FFFFFF;
-            --bg-card-hover: #F8FAFC;
+            --bg-card-hover: #F1F5F9;
+            --bg-sidebar: #FFFFFF;
             
             --primary: #2563EB;
             --primary-hover: #1D4ED8;
@@ -57,6 +60,7 @@
             --text-muted: #64748B;
             --border: rgba(0, 0, 0, 0.1);
             --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            --shadow-glow: 0 0 20px rgba(37, 99, 235, 0.1);
             --input-bg: #F1F5F9;
             --input-text: #333;
         }
@@ -66,7 +70,8 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Outfit', sans-serif;
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -81,194 +86,228 @@
         /* --- NAVBAR --- */
         nav {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            /* Changed to allow absolute centering of logo */
+            justify-content: flex-start; 
             padding: 15px 5%;
             background: var(--bg-nav);
             position: sticky;
             top: 0;
             z-index: 1000;
             border-bottom: 1px solid var(--border);
-            backdrop-filter: blur(15px);
-            height: 90px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            height: 80px;
         }
 
         .logo-container {
+            /* ABSOLUTE CENTER POSITIONING */
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            z-index: 1001;
             display: flex;
             align-items: center;
+            z-index: 1001;
         }
         .logo img {
-            height: 80px; 
+            height: 60px; /* Slightly larger for center appeal */
             width: auto;
-            filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.2));
+            filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.4));
             transition: transform 0.3s ease;
         }
         .logo img:hover { transform: scale(1.05); }
 
-        .nav-actions { margin-left: auto; display: flex; align-items: center; gap: 12px; }
-        .nav-left { display: flex; align-items: center; gap: 12px; }
-
-        .nav-btn {
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.9rem;
+        /* MENU BUTTON (HAMBURGER) - LEFT SIDE */
+        .menu-trigger {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             cursor: pointer;
+            padding: 10px 18px;
+            border-radius: 8px;
             border: 1px solid var(--border);
-            background: transparent;
-            color: var(--text-main);
+            background: rgba(255,255,255,0.05);
+            z-index: 1002; /* Ensure clickable */
         }
-        .btn-primary { background: var(--primary); color: #fff; border: none; }
-        .btn-primary:hover { background: var(--primary-hover); transform: translateY(-2px); }
-        .btn-theme { font-size: 1.2rem; padding: 10px; border-radius: 50%; width: 45px; height: 45px; justify-content: center; }
-        .btn-theme:hover { background: var(--bg-card-hover); }
+        .menu-trigger:hover { background: var(--bg-card-hover); border-color: var(--primary); }
+        .menu-trigger span { font-weight: 600; font-size: 0.9rem; }
+        .menu-trigger i { font-size: 1.2rem; }
 
-        /* --- MOBILE NAV FIXES --- */
-        @media (max-width: 900px) {
-            nav { padding: 10px 15px; height: 75px; }
-            .logo img { height: 50px; }
-            .nav-left { display: flex !important; }
-            .nav-btn span { display: none; } 
-            .nav-btn { padding: 8px; width: 40px; height: 40px; justify-content: center; }
-            .mobile-hide { display: none !important; }
+        /* SIDEBAR MENU - NOW FROM LEFT */
+        .sidebar-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); z-index: 2000; display: none; opacity: 0; transition: opacity 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        .sidebar {
+            position: fixed; 
+            top: 0; 
+            left: -320px; /* Hidden to the LEFT */
+            width: 300px; 
+            height: 100%;
+            background: var(--bg-sidebar); 
+            z-index: 2001; 
+            transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 30px; 
+            display: flex; 
+            flex-direction: column; 
+            border-right: 1px solid var(--border); /* Border on right now */
+            box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+        }
+        .sidebar.active { left: 0; } /* Slides in to 0 */
+        
+        .sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+        .close-menu { font-size: 1.5rem; cursor: pointer; color: var(--text-muted); }
+        .close-menu:hover { color: var(--primary); transform: rotate(90deg); }
+
+        .menu-links { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+        .menu-links li a {
+            font-size: 1.1rem; font-weight: 600; color: var(--text-main); display: flex; align-items: center; gap: 15px;
+            padding: 12px; border-radius: 8px;
+        }
+        .menu-links li a:hover { background: var(--bg-card-hover); color: var(--primary); transform: translateX(5px); }
+        .menu-links li a i { width: 25px; text-align: center; color: var(--primary); }
+
+        .sidebar-footer { margin-top: auto; border-top: 1px solid var(--border); padding-top: 20px; }
+        .theme-toggle-btn {
+            width: 100%; padding: 12px; display: flex; justify-content: space-between; align-items: center;
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; color: var(--text-main); cursor: pointer;
         }
 
         /* --- HERO SECTION --- */
-        .hero { text-align: center; padding: 80px 20px 50px; }
-        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; font-weight: 800; line-height: 1.1; color: var(--text-main); }
-        .hero h1 span { color: var(--primary); }
-        .hero p { color: var(--text-muted); font-size: 1.2rem; max-width: 600px; margin: 0 auto 30px; }
-
-        .mobile-support-btn {
-            display: none;
-            margin: 0 auto 30px auto;
-            background: rgba(37, 211, 102, 0.15);
-            color: #25d366;
-            border: 1px solid #25d366;
-            padding: 10px 20px;
-            border-radius: 50px;
-            width: fit-content;
-            font-weight: 600;
-            align-items: center;
-            gap: 8px;
+        .hero { text-align: center; padding: 100px 20px 60px; position: relative; }
+        .hero::before {
+            content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 60%; height: 300px; background: var(--primary); filter: blur(120px); opacity: 0.15; z-index: -1;
+            border-radius: 50%;
         }
-        @media (max-width: 900px) { .mobile-support-btn { display: flex; } }
 
-        .features-strip { display: flex; justify-content: center; gap: 30px; margin-bottom: 60px; flex-wrap: wrap; }
+        .hero h1 { font-size: 4rem; margin-bottom: 20px; font-weight: 800; line-height: 1.1; color: var(--text-main); letter-spacing: -2px; }
+        .hero h1 span { 
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero p { color: var(--text-muted); font-size: 1.25rem; max-width: 650px; margin: 0 auto 35px; }
+
+        .hero-btns { display: flex; justify-content: center; gap: 15px; margin-bottom: 50px; flex-wrap: wrap; }
+        .cta-btn {
+            padding: 14px 30px; border-radius: 50px; font-weight: 700; font-size: 1rem; display: flex; align-items: center; gap: 10px;
+            cursor: pointer; transition: 0.3s;
+        }
+        .btn-filled { background: var(--primary); color: white; border: none; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); }
+        .btn-filled:hover { background: var(--primary-hover); transform: translateY(-3px); box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5); }
+        
+        .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-main); }
+        .btn-outline:hover { border-color: var(--primary); background: rgba(59, 130, 246, 0.05); }
+
+        .features-strip { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
         .feature-item {
-            background: var(--bg-card); border: 1px solid var(--border); padding: 12px 25px; border-radius: 50px;
+            background: var(--bg-card); border: 1px solid var(--border); padding: 10px 25px; border-radius: 50px;
             color: var(--text-main); font-size: 0.9rem; font-weight: 500; display: flex; align-items: center; gap: 10px;
             box-shadow: var(--shadow);
         }
-        .feature-item i { color: var(--primary); }
+        .feature-item i { color: #10b981; }
 
         /* --- LAYOUT & CARDS --- */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px 80px; }
-        .section-header { margin-bottom: 40px; text-align: center; }
-        .section-header h2 { font-size: 2rem; font-weight: 700; color: var(--text-main); }
-        .section-header p { color: var(--text-muted); margin-top: 8px; }
+        .section-header { margin-bottom: 50px; text-align: center; }
+        .section-header h2 { font-size: 2.5rem; font-weight: 800; color: var(--text-main); letter-spacing: -1px; margin-bottom: 10px; }
+        .section-header p { color: var(--text-muted); font-size: 1.1rem; }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
 
         .card {
-            background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 25px;
-            position: relative; transition: all 0.3s ease; display: flex; flex-direction: column; overflow: hidden;
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 30px;
+            position: relative; transition: all 0.4s ease; display: flex; flex-direction: column; overflow: hidden;
             box-shadow: var(--shadow);
         }
-        .card:hover { transform: translateY(-5px); border-color: var(--primary); background: var(--bg-card-hover); }
+        .card:hover { transform: translateY(-8px); border-color: var(--primary); box-shadow: var(--shadow-glow); }
 
         .badge {
             position: absolute; top: 20px; right: 20px; background: rgba(59, 130, 246, 0.1); color: var(--primary);
-            font-size: 0.75rem; padding: 5px 12px; border-radius: 6px; font-weight: 700; text-transform: uppercase;
+            font-size: 0.75rem; padding: 6px 14px; border-radius: 30px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
         }
-        .badge.best-seller { background: var(--primary); color: #fff; }
+        .badge.best-seller { background: linear-gradient(135deg, var(--primary), var(--accent)); color: #fff; box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3); }
 
-        .card-top { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .card-top { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
         .icon-box {
-            width: 55px; height: 55px; background: rgba(148, 163, 184, 0.1); border-radius: 12px;
-            display: flex; justify-content: center; align-items: center; font-size: 1.8rem; color: var(--text-main);
+            width: 60px; height: 60px; background: rgba(255, 255, 255, 0.03); border-radius: 16px; border: 1px solid var(--border);
+            display: flex; justify-content: center; align-items: center; font-size: 2rem; color: var(--text-main); flex-shrink: 0;
         }
-        
-        /* LOGO IMAGES (FIXED) */
-        .logo-img-fix { width: 35px; height: 35px; object-fit: contain; }
+        .logo-img-fix { width: 45px; height: 45px; object-fit: contain; }
 
-        .card h3 { font-size: 1.3rem; font-weight: 700; color: var(--text-main); }
-        .card ul { list-style: none; margin-bottom: 25px; flex-grow: 1; }
-        .card ul li { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 10px; display: flex; align-items: center; }
-        .card ul li i { color: var(--primary); margin-right: 10px; font-size: 0.8rem; }
+        .card h3 { font-size: 1.4rem; font-weight: 700; color: var(--text-main); }
+        .card ul { list-style: none; margin-bottom: 30px; flex-grow: 1; }
+        .card ul li { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 12px; display: flex; align-items: center; }
+        .card ul li i { color: var(--primary); margin-right: 12px; font-size: 0.9rem; background: rgba(59, 130, 246, 0.1); padding: 5px; border-radius: 50%; }
 
-        .price-row { display: flex; justify-content: space-between; align-items: center; margin-top: auto; border-top: 1px solid var(--border); padding-top: 20px; }
-        .price-tag { font-size: 1.6rem; font-weight: 700; color: var(--text-main); }
+        .price-row { display: flex; justify-content: space-between; align-items: center; margin-top: auto; border-top: 1px solid var(--border); padding-top: 25px; }
+        .price-tag { font-size: 1.8rem; font-weight: 800; color: var(--text-main); }
         .price-tag span { font-size: 0.9rem; color: var(--text-muted); font-weight: 400; }
 
         .buy-btn {
-            display: inline-block; background: var(--primary); color: #fff; padding: 10px 24px; border-radius: 8px;
-            font-weight: 600; font-size: 0.9rem; transition: 0.3s; border: none; cursor: pointer; text-align: center;
+            display: inline-block; background: var(--bg-body); color: var(--text-main); padding: 12px 28px; border-radius: 12px;
+            font-weight: 600; font-size: 0.95rem; transition: 0.3s; border: 1px solid var(--border); cursor: pointer; text-align: center;
         }
-        .buy-btn:hover { background: var(--primary-hover); }
+        .buy-btn:hover { background: var(--primary); border-color: var(--primary); color: #fff; }
 
         /* --- VIRTUAL NUMBERS --- */
         .country-bar {
-            background: var(--bg-card); padding: 20px; border-radius: 12px; margin-bottom: 40px;
-            display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; border: 1px solid var(--border); box-shadow: var(--shadow);
+            background: var(--bg-card); padding: 25px; border-radius: 16px; margin-bottom: 40px;
+            display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; border: 1px solid var(--border); box-shadow: var(--shadow);
         }
         .country-flag {
-            font-size: 0.9rem; color: var(--text-main); background: var(--bg-card-hover); padding: 8px 16px; border-radius: 6px; border: 1px solid var(--border); cursor: default;
+            font-size: 0.95rem; color: var(--text-main); background: var(--bg-body); padding: 10px 20px; border-radius: 8px; border: 1px solid var(--border); cursor: default; font-weight: 500;
         }
-        .app-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
-        .app-grid .card { padding: 25px; align-items: center; text-align: center; }
-        .app-grid .icon-box { font-size: 2rem; background: transparent; margin-bottom: 15px; color: var(--primary); }
-        .app-grid h4 { margin-bottom: 15px; font-size: 1.1rem; color: var(--text-main); }
-        .app-grid .buy-btn { width: 100%; background: transparent; border: 1px solid var(--primary); color: var(--primary); }
-        .app-grid .buy-btn:hover { background: var(--primary); color: #fff; }
+        .app-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+        .app-grid .card { padding: 30px; align-items: center; text-align: center; }
+        .app-grid .icon-box { font-size: 2.5rem; background: transparent; border: none; margin-bottom: 20px; color: var(--primary); }
+        .app-grid h4 { margin-bottom: 20px; font-size: 1.2rem; color: var(--text-main); }
+        .app-grid .buy-btn { width: 100%; }
 
-        /* --- CONTACT FORM --- */
+        /* --- CONTACT --- */
         .contact-section {
-            background: var(--bg-card); padding: 40px; border-radius: 16px; border: 1px solid var(--border);
-            max-width: 700px; margin: 0 auto; box-shadow: var(--shadow);
+            background: var(--bg-card); padding: 50px; border-radius: 24px; border: 1px solid var(--border);
+            max-width: 800px; margin: 0 auto; box-shadow: var(--shadow);
         }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; color: var(--text-main); margin-bottom: 8px; font-weight: 500; }
+        .form-group { margin-bottom: 25px; }
+        .form-group label { display: block; color: var(--text-main); margin-bottom: 10px; font-weight: 500; font-size: 0.95rem; }
         .form-control {
-            width: 100%; background: var(--input-bg); border: 1px solid var(--border); padding: 14px;
-            border-radius: 8px; color: var(--input-text); outline: none; transition: 0.3s;
+            width: 100%; background: var(--input-bg); border: 1px solid var(--border); padding: 16px;
+            border-radius: 10px; color: var(--input-text); outline: none; transition: 0.3s; font-size: 1rem;
         }
-        .form-control:focus { border-color: var(--primary); }
+        .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
         .submit-btn {
-            width: 100%; background: var(--primary); color: #fff; padding: 15px; border: none;
-            border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 1rem; transition: 0.3s;
+            width: 100%; background: var(--primary); color: #fff; padding: 16px; border: none;
+            border-radius: 10px; font-weight: 700; cursor: pointer; font-size: 1.05rem; transition: 0.3s;
         }
-        .submit-btn:hover { background: var(--primary-hover); }
+        .submit-btn:hover { background: var(--primary-hover); transform: translateY(-2px); }
 
         /* --- MODALS --- */
         .modal {
-            display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px);
+            display: none; position: fixed; z-index: 3000; left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.8); backdrop-filter: blur(8px);
         }
         .modal-content {
-            background-color: var(--bg-card); margin: 5% auto; padding: 35px; border: 1px solid var(--border);
-            width: 90%; max-width: 500px; border-radius: 16px; color: var(--text-muted); position: relative;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5); max-height: 90vh; overflow-y: auto;
+            background-color: var(--bg-card); margin: 5% auto; padding: 40px; border: 1px solid var(--border);
+            width: 90%; max-width: 550px; border-radius: 20px; color: var(--text-muted); position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); max-height: 90vh; overflow-y: auto;
+            animation: modalFadeIn 0.3s ease-out;
         }
-        .close { color: var(--text-muted); float: right; font-size: 28px; cursor: pointer; }
+        @keyframes modalFadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        
+        .close { position: absolute; top: 20px; right: 25px; color: var(--text-muted); font-size: 24px; cursor: pointer; transition: 0.2s; }
         .close:hover { color: var(--primary); }
-        .modal h2 { color: var(--text-main); margin-bottom: 20px; }
+        .modal h2 { color: var(--text-main); margin-bottom: 25px; font-size: 1.8rem; font-weight: 700; }
 
         /* --- PAYMENT & BUY OPTIONS --- */
         .buy-option-card {
-            display: flex; align-items: center; justify-content: space-between; padding: 20px;
-            background: var(--bg-card-hover); border: 1px solid var(--border); border-radius: 12px;
+            display: flex; align-items: center; justify-content: space-between; padding: 25px;
+            background: var(--bg-card-hover); border: 1px solid var(--border); border-radius: 14px;
             margin-bottom: 15px; cursor: pointer; transition: 0.3s;
         }
         .buy-option-card:hover { border-color: var(--primary); transform: translateX(5px); }
-        .buy-option-icon { font-size: 2rem; margin-right: 15px; width: 40px; text-align: center; }
+        .buy-option-icon { font-size: 2rem; margin-right: 20px; width: 40px; text-align: center; }
 
         .payment-methods-grid {
             display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px;
@@ -276,97 +315,160 @@
         .payment-method-card {
             background: var(--bg-card-hover); border: 1px solid var(--border); border-radius: 12px;
             padding: 15px; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            transition: all 0.3s; height: 100px;
+            transition: all 0.3s; height: 110px;
         }
         .payment-method-card:hover { border-color: var(--primary); background: rgba(59, 130, 246, 0.1); }
-        .payment-method-card.selected { border-color: var(--primary); background: rgba(59, 130, 246, 0.2); box-shadow: 0 0 10px rgba(59, 130, 246, 0.2); }
+        .payment-method-card.selected { border-color: var(--primary); background: rgba(59, 130, 246, 0.2); box-shadow: 0 0 15px rgba(59, 130, 246, 0.2); }
         
-        .pm-logo { font-weight: 800; font-size: 1.1rem; color: var(--text-main); }
+        .pm-logo { font-weight: 800; font-size: 1.2rem; color: var(--text-main); }
         
         .payment-details-box {
-            background: rgba(0,0,0,0.2); padding: 20px; border-radius: 12px; border: 1px solid var(--border);
-            margin-bottom: 20px; display: none; text-align: center;
+            background: rgba(0,0,0,0.3); padding: 25px; border-radius: 14px; border: 1px solid var(--border);
+            margin-bottom: 25px; display: none; text-align: center;
         }
-        .account-number { font-size: 1.5rem; font-weight: 700; color: var(--primary); letter-spacing: 1px; margin: 10px 0; user-select: all; cursor: pointer; }
-        .account-title { font-size: 0.9rem; color: var(--text-muted); }
-        
+        .account-number { font-size: 1.8rem; font-weight: 700; color: var(--primary); letter-spacing: 1px; margin: 10px 0; user-select: all; cursor: pointer; }
+        .account-title { font-size: 1rem; color: var(--text-muted); }
+        .copy-hint { font-size: 0.8rem; opacity: 0.7; display: block; margin-top: 5px; }
+
         /* Verification Loader */
-        .verification-loader { display: none; text-align: center; padding: 30px; }
+        .verification-loader { display: none; text-align: center; padding: 40px 20px; }
         .loader-spinner {
             border: 4px solid rgba(255,255,255,0.1); border-left-color: var(--primary);
-            border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto 20px;
+            border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 0 auto 25px;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .verify-steps { text-align: left; margin-top: 20px; color: var(--text-muted); font-size: 0.85rem; }
-        .verify-step { margin-bottom: 5px; display: flex; align-items: center; gap: 8px; opacity: 0.5; }
+        .verify-steps { text-align: left; margin-top: 30px; color: var(--text-muted); font-size: 0.95rem; background: var(--bg-card-hover); padding: 20px; border-radius: 12px; }
+        .verify-step { margin-bottom: 10px; display: flex; align-items: center; gap: 12px; opacity: 0.4; }
         .verify-step.active { opacity: 1; color: var(--primary); font-weight: 600; }
         .verify-step.done { opacity: 1; color: #22c55e; }
         .verify-step.error { opacity: 1; color: #ef4444; }
 
+        /* USER DASHBOARD TABS */
+        .tab-header { display: flex; border-bottom: 1px solid var(--border); margin-bottom: 25px; }
+        .tab-btn {
+            padding: 12px 20px; background: transparent; border: none; border-bottom: 2px solid transparent;
+            color: var(--text-muted); font-weight: 600; cursor: pointer; font-size: 1rem;
+        }
+        .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .profile-info-row { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid var(--border); }
+        .profile-label { color: var(--text-muted); }
+        .profile-val { font-weight: 600; color: var(--text-main); }
+
+        .order-item {
+            background: var(--bg-card-hover); padding: 15px; border-radius: 10px; margin-bottom: 15px;
+            display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border);
+        }
+        .order-details h5 { color: var(--text-main); font-size: 1rem; margin-bottom: 4px; }
+        .order-details p { font-size: 0.85rem; color: var(--text-muted); }
+        .order-status { font-size: 0.8rem; padding: 4px 10px; border-radius: 6px; font-weight: 700; }
+        .status-pending { background: rgba(234, 179, 8, 0.15); color: #eab308; }
+        .status-verified { background: rgba(34, 197, 94, 0.15); color: #22c55e; }
+
         .plan-option-btn {
-            display: block; width: 100%; padding: 15px; margin-bottom: 10px; border-radius: 8px;
+            display: block; width: 100%; padding: 20px; margin-bottom: 15px; border-radius: 12px;
             background: var(--bg-card-hover); border: 1px solid var(--border); color: var(--text-main);
-            text-align: left; cursor: pointer; font-weight: 600; display: flex; justify-content: space-between;
+            text-align: left; cursor: pointer; font-weight: 600; display: flex; justify-content: space-between; align-items: center;
         }
         .plan-option-btn:hover { border-color: var(--primary); background: rgba(59, 130, 246, 0.1); }
         
         footer {
-            background: var(--bg-nav); padding: 50px 20px; text-align: center; border-top: 1px solid var(--border);
+            background: var(--bg-nav); padding: 60px 20px; text-align: center; border-top: 1px solid var(--border);
             color: var(--text-muted); margin-top: 80px;
         }
-        .footer-logo { display: block; margin: 0 auto 20px auto; height: 60px; filter: grayscale(100%); opacity: 0.7; transition: 0.3s; }
+        .footer-logo { display: block; margin: 0 auto 25px auto; height: 60px; filter: grayscale(100%); opacity: 0.7; transition: 0.3s; }
         .footer-logo:hover { filter: grayscale(0%); opacity: 1; }
-        .footer-links a { margin: 0 10px; }
+        .footer-links a { margin: 0 15px; font-size: 0.95rem; }
+        .social-icons a { font-size: 1.5rem; margin: 0 10px; color: var(--text-muted); }
+        .social-icons a:hover { color: var(--primary); }
 
         .msg-box { display: none; padding: 15px; border-radius: 8px; margin-bottom: 15px; text-align: center; font-size: 0.9rem; }
         .msg-error { background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid #ef4444; }
         .success-message { display: none; text-align: center; padding: 30px; background: rgba(34, 197, 94, 0.1); border: 1px solid #22c55e; border-radius: 12px; color: #fff; }
-        .success-message h3 { color: #22c55e; margin-bottom: 10px; }
-        .success-message i { font-size: 3rem; color: #22c55e; margin-bottom: 15px; }
+        
+        .auth-switch { text-align: center; margin-top: 20px; font-size: 0.9rem; }
+        .auth-switch span { color: var(--primary); cursor: pointer; font-weight: 600; text-decoration: underline; }
+
+        /* Media Queries */
+        @media (max-width: 900px) {
+            nav { padding: 10px 20px; height: 70px; }
+            .hero h1 { font-size: 2.8rem; }
+            .grid { grid-template-columns: 1fr; }
+            .modal-content { width: 95%; padding: 25px; margin: 10% auto; }
+            .menu-trigger { padding: 8px 12px; }
+            .menu-trigger span { display: none; }
+        }
 
     </style>
 </head>
 <body>
 
-    <!-- Navigation -->
+    <!-- Professional Navbar -->
     <nav>
-        <div class="nav-left">
-            <button class="nav-btn btn-theme" onclick="toggleTheme()"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
+        <!-- Hamburger Menu Button (Left Side) -->
+        <div class="menu-trigger" onclick="toggleMenu()">
+            <i class="fa-solid fa-bars"></i>
+            <span>MENU</span>
         </div>
+
+        <!-- Logo (Center Absolute) -->
         <div class="logo-container">
             <a href="#" class="logo"><img src="logo.png" alt="Digital Apex Logo"></a>
         </div>
-        <div class="nav-actions">
-            <button class="nav-btn btn-signup btn-primary" onclick="openModal('signupModal')">
-                <i class="fa-solid fa-user-plus"></i> <span>Sign Up</span>
-            </button>
-            <a href="https://wa.me/12832219723" target="_blank" class="nav-btn mobile-hide" style="color: #25d366; border-color: #25d366;">
-                <i class="fa-brands fa-whatsapp"></i> <span>Support</span>
-            </a>
-        </div>
     </nav>
+
+    <!-- Sidebar Menu (From Left) -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleMenu()"></div>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>Menu</h3>
+            <div class="close-menu" onclick="toggleMenu()"><i class="fa-solid fa-xmark"></i></div>
+        </div>
+        <ul class="menu-links">
+            <li><a href="#" onclick="toggleMenu()"><i class="fa-solid fa-house"></i> Home</a></li>
+            <li><a href="#premium-section" onclick="toggleMenu()"><i class="fa-solid fa-crown"></i> Premium Apps</a></li>
+            <li><a href="#virtual-numbers" onclick="toggleMenu()"><i class="fa-solid fa-mobile-screen"></i> Virtual Numbers</a></li>
+            <!-- Dynamic User Link -->
+            <li><a href="#" id="menuAuthLink" onclick="handleAuthClick()"><i class="fa-solid fa-user"></i> Sign Up / Login</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <button class="theme-toggle-btn" onclick="toggleTheme()">
+                <span>Appearance</span>
+                <i class="fa-solid fa-moon" id="themeIcon"></i>
+            </button>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero">
         <h1>Welcome to <br> <span>DIGITAL APEX</span></h1>
-        <p>Premium Digital Tools, Accounts & Virtual Numbers. Instant Delivery.</p>
-        <a href="https://wa.me/12832219723" class="mobile-support-btn"><i class="fa-brands fa-whatsapp"></i> WhatsApp Support</a>
+        <p>Your #1 Source for Premium Digital Tools, Accounts & Virtual Numbers. Secure, Fast & Reliable.</p>
+        
+        <div class="hero-btns">
+            <button class="cta-btn btn-filled" onclick="document.getElementById('premium-section').scrollIntoView()"><i class="fa-solid fa-cart-shopping"></i> Shop Now</button>
+            <a href="https://wa.me/12832219723" target="_blank" class="cta-btn btn-outline"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+        </div>
+
         <div class="features-strip">
-            <div class="feature-item"><i class="fa-solid fa-bolt"></i> Fast</div>
-            <div class="feature-item"><i class="fa-solid fa-shield-halved"></i> Secure</div>
-            <div class="feature-item"><i class="fa-solid fa-check-circle"></i> Reliable</div>
+            <div class="feature-item"><i class="fa-solid fa-bolt"></i> Instant Delivery</div>
+            <div class="feature-item"><i class="fa-solid fa-shield-halved"></i> 100% Secure</div>
+            <div class="feature-item"><i class="fa-solid fa-headset"></i> 24/7 Support</div>
         </div>
     </section>
 
     <div class="container">
-        <div class="section-header"><h2>Premium Subscriptions</h2><p>Best prices for top-tier accounts.</p></div>
+        <!-- Premium Section -->
+        <div id="premium-section" class="section-header"><h2>Premium Subscriptions</h2><p>Unlock professional features at unbeatable prices.</p></div>
 
         <div class="grid">
             <!-- CAPCUT PRO -->
             <div class="card" style="border-color: var(--primary);">
                 <span class="badge best-seller">Top Seller</span>
                 <div class="card-top"><div class="icon-box" style="color: var(--primary);"><i class="fa-solid fa-scissors"></i></div><h3>CapCut Pro</h3></div>
-                <ul><li><i class="fa-solid fa-check"></i> 1 Month & 6 Months Plans</li><li><i class="fa-solid fa-check"></i> Private Account</li></ul>
+                <ul><li><i class="fa-solid fa-check"></i> 1 Month & 6 Months Plans</li><li><i class="fa-solid fa-check"></i> Private Account</li><li><i class="fa-solid fa-check"></i> Full Features Unlocked</li></ul>
                 <div class="price-row"><div class="price-tag">From $1.00</div><button class="buy-btn" onclick="openModal('capcutModal')">Buy Now</button></div>
             </div>
 
@@ -374,39 +476,39 @@
             <div class="card">
                 <span class="badge">New</span>
                 <div class="card-top"><div class="icon-box" style="color: #00a8e1;"><i class="fa-brands fa-amazon"></i></div><h3>Prime Video</h3></div>
-                <ul><li><i class="fa-solid fa-check"></i> 6 Months Plan</li><li><i class="fa-solid fa-check"></i> 4K UHD Support</li></ul>
+                <ul><li><i class="fa-solid fa-check"></i> 6 Months Plan</li><li><i class="fa-solid fa-check"></i> 4K UHD Support</li><li><i class="fa-solid fa-check"></i> Ad-Free Streaming</li></ul>
                 <div class="price-row"><div class="price-tag">$6.00</div><button class="buy-btn" onclick="initiateBuyProcess('Prime Video 6 Months', '6.00')">Buy Now</button></div>
             </div>
 
             <!-- GitHub Edu -->
             <div class="card">
                 <div class="card-top"><div class="icon-box"><i class="fa-brands fa-github"></i></div><h3>GitHub Edu</h3></div>
-                <ul><li><i class="fa-solid fa-check"></i> Student Pack</li><li><i class="fa-solid fa-check"></i> Copilot Access</li></ul>
+                <ul><li><i class="fa-solid fa-check"></i> Student Developer Pack</li><li><i class="fa-solid fa-check"></i> Copilot Access Included</li><li><i class="fa-solid fa-check"></i> JetBrains & Azure</li></ul>
                 <div class="price-row"><div class="price-tag">$5.00</div><button class="buy-btn" onclick="initiateBuyProcess('GitHub Student Pack', '5.00')">Buy Now</button></div>
             </div>
 
-            <!-- Canva Admin (Fixed Logo) -->
+            <!-- Canva Admin (Fixed Logo with PNG) -->
             <div class="card">
                 <div class="card-top">
                     <div class="icon-box">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Canva_icon_2021.svg/1024px-Canva_icon_2021.svg.png" class="logo-img-fix" alt="Canva">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Canva_icon_2021.svg/2048px-Canva_icon_2021.svg.png" class="logo-img-fix" alt="Canva">
                     </div>
                     <h3>Canva Admin</h3>
                 </div>
-                <ul><li><i class="fa-solid fa-check"></i> Admin Panel</li><li><i class="fa-solid fa-check"></i> Add 500 Members</li></ul>
+                <ul><li><i class="fa-solid fa-check"></i> Admin Panel Access</li><li><i class="fa-solid fa-check"></i> Add 500 Members</li><li><i class="fa-solid fa-check"></i> Lifetime Warranty</li></ul>
                 <div class="price-row"><div class="price-tag">$7.00</div><button class="buy-btn" onclick="initiateBuyProcess('Canva Admin Panel', '7.00')">Buy Now</button></div>
             </div>
 
-            <!-- ChatGPT (Fixed Logo) -->
+            <!-- ChatGPT -->
             <div class="card">
-                <span class="badge">Hot</span>
+                <span class="badge">Trending</span>
                 <div class="card-top">
                     <div class="icon-box">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" class="logo-img-fix" alt="ChatGPT">
                     </div>
                     <h3>ChatGPT Plus</h3>
                 </div>
-                <ul><li><i class="fa-solid fa-check"></i> GPT-5.3 Model</li><li><i class="fa-solid fa-check"></i> DALL·E 3 Access</li></ul>
+                <ul><li><i class="fa-solid fa-check"></i> Latest GPT-4o Model</li><li><i class="fa-solid fa-check"></i> DALL·E 3 Image Gen</li><li><i class="fa-solid fa-check"></i> Priority Access</li></ul>
                 <div class="price-row"><div class="price-tag">$10.00</div><button class="buy-btn" onclick="initiateBuyProcess('ChatGPT Plus', '10.00')">Buy Now</button></div>
             </div>
             
@@ -418,82 +520,141 @@
                     </div>
                     <h3>Netflix</h3>
                 </div>
-                <ul><li><i class="fa-solid fa-check"></i> 1 Month Shared</li><li><i class="fa-solid fa-check"></i> Premium Ultra HD</li></ul>
+                <ul><li><i class="fa-solid fa-check"></i> 1 Month Shared</li><li><i class="fa-solid fa-check"></i> Premium Ultra HD</li><li><i class="fa-solid fa-check"></i> Works on TV/Mobile</li></ul>
                 <div class="price-row"><div class="price-tag">$3.00</div><button class="buy-btn" onclick="initiateBuyProcess('Netflix 4K', '3.00')">Buy Now</button></div>
             </div>
 
              <!-- LinkedIn -->
              <div class="card">
                 <div class="card-top"><div class="icon-box" style="color: #0077b5;"><i class="fa-brands fa-linkedin"></i></div><h3>LinkedIn Premium</h3></div>
-                <ul><li><i class="fa-solid fa-check"></i> 12 Month Career Plan</li><li><i class="fa-solid fa-check"></i> Career Insights</li></ul>
+                <ul><li><i class="fa-solid fa-check"></i> 12 Month Career Plan</li><li><i class="fa-solid fa-check"></i> InMail Credits</li><li><i class="fa-solid fa-check"></i> Learning Access</li></ul>
                 <div class="price-row"><div class="price-tag">$15.00</div><button class="buy-btn" onclick="initiateBuyProcess('LinkedIn Premium', '15.00')">Buy Now</button></div>
             </div>
         </div>
 
-        <div style="height: 60px;"></div>
+        <div style="height: 80px;"></div>
 
         <!-- VIRTUAL NUMBERS -->
-        <div class="section-header"><h2>Virtual Numbers (OTP)</h2><p>Non-VoIP numbers for verification.</p></div>
+        <div id="virtual-numbers" class="section-header"><h2>Virtual Numbers (OTP)</h2><p>Secure Non-VoIP numbers for account verifications.</p></div>
         <div class="country-bar">
-            <span class="country-flag">🇺🇸 USA</span><span class="country-flag">🇬🇧 UK</span><span class="country-flag">🇨🇦 Canada</span><span class="country-flag">🇦🇺 Australia</span><span class="country-flag">🇩🇪 Germany</span><span class="country-flag">🇫🇷 France</span>
+            <span class="country-flag">🇺🇸 USA</span><span class="country-flag">🇬🇧 UK</span><span class="country-flag">🇨🇦 Canada</span><span class="country-flag">🇦🇺 Australia</span><span class="country-flag">🇩🇪 Germany</span><span class="country-flag">🇫🇷 France</span><span class="country-flag">🇵🇰 Pakistan</span>
         </div>
         <div class="grid app-grid">
             <div class="card"><i class="fa-brands fa-telegram icon-box" style="color: #0088cc;"></i><h4>Telegram</h4><button class="buy-btn" onclick="initiateBuyProcess('Telegram OTP', 'Varies')">Buy Now</button></div>
             <div class="card"><i class="fa-brands fa-whatsapp icon-box" style="color: #25d366;"></i><h4>WhatsApp</h4><button class="buy-btn" onclick="initiateBuyProcess('WhatsApp OTP', 'Varies')">Buy Now</button></div>
             <div class="card"><i class="fa-brands fa-google icon-box" style="color: var(--text-main);"></i><h4>Google</h4><button class="buy-btn" onclick="initiateBuyProcess('Google OTP', 'Varies')">Buy Now</button></div>
             <div class="card"><i class="fa-brands fa-facebook icon-box" style="color: #1877f2;"></i><h4>Facebook</h4><button class="buy-btn" onclick="initiateBuyProcess('Facebook OTP', 'Varies')">Buy Now</button></div>
+            <div class="card"><i class="fa-brands fa-tiktok icon-box" style="color: #000000; background: #fff; padding: 5px; border-radius: 5px;"></i><h4>TikTok</h4><button class="buy-btn" onclick="initiateBuyProcess('TikTok OTP', 'Varies')">Buy Now</button></div>
+            <div class="card"><i class="fa-brands fa-discord icon-box" style="color: #5865F2;"></i><h4>Discord</h4><button class="buy-btn" onclick="initiateBuyProcess('Discord OTP', 'Varies')">Buy Now</button></div>
         </div>
         
-        <div style="height: 60px;"></div>
+        <div style="height: 80px;"></div>
 
         <!-- CONTACT US FORM -->
-        <div class="section-header"><h2>Contact Us</h2><p>Send us a direct message via Email.</p></div>
+        <div class="section-header"><h2>Contact Us</h2><p>Questions? Send us a direct message.</p></div>
         <div class="contact-section">
             <div class="success-message" id="formSuccessMessage">
-                <i class="fa-solid fa-circle-check"></i><h3>Thank You!</h3><p>Your message has been sent successfully. We will contact you shortly.</p>
+                <i class="fa-solid fa-circle-check" style="font-size: 3rem; margin-bottom: 15px;"></i><h3>Thank You!</h3><p>Your message has been sent successfully.</p>
             </div>
             <form id="contactForm">
                 <input type="hidden" name="_subject" value="New Inquiry from Digital Apex Website">
-                <div class="grid" style="gap: 15px;">
+                <div class="grid" style="gap: 20px;">
                     <div class="form-group"><label>Your Name</label><input type="text" name="name" class="form-control" placeholder="John Doe" required></div>
                     <div class="form-group"><label>Your Email</label><input type="email" name="email" class="form-control" placeholder="email@example.com" required></div>
                 </div>
                 <div class="form-group"><label>Message</label><textarea name="message" rows="5" class="form-control" placeholder="How can we help you?" required></textarea></div>
                 <button type="submit" class="submit-btn" id="submitBtn">Send Message</button>
             </form>
+            <div style="text-align: center; margin-top: 30px; display: flex; justify-content: center; gap: 20px;">
+                <a href="https://wa.me/12832219723" target="_blank" style="color: #25d366; font-size: 1.5rem;"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://instagram.com/digital.apex0" target="_blank" style="color: #E1306C; font-size: 1.5rem;"><i class="fa-brands fa-instagram"></i></a>
+            </div>
         </div>
     </div>
 
+    <!-- FOOTER -->
     <footer>
         <img src="logo.png" alt="Digital Apex Logo" class="footer-logo">
+        <div class="social-icons" style="margin-bottom: 20px;">
+            <a href="https://wa.me/12832219723" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://instagram.com/digital.apex0" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+        </div>
         <p>© 2026 DIGITAL APEX. All rights reserved.</p>
         <div class="footer-links" style="margin-top: 20px;">
-            <a onclick="openModal('privacyModal')">Privacy Policy</a> | <a onclick="openModal('termsModal')">Terms of Service</a>
+            <a onclick="openModal('privacyModal')" style="cursor:pointer;">Privacy Policy</a> | <a onclick="openModal('termsModal')" style="cursor:pointer;">Terms of Service</a>
         </div>
     </footer>
 
-    <!-- SIGNUP MODAL -->
-    <div id="signupModal" class="modal">
+    <!-- AUTHENTICATION MODAL (Sign Up / Login) -->
+    <div id="authModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal('signupModal')">&times;</span>
-            <h2 id="signupTitle">Create Account</h2>
-            <div id="signupStep1">
-                <p style="margin-bottom: 20px; font-size: 0.9rem;">Register to manage your orders.</p>
+            <span class="close" onclick="closeModal('authModal')">&times;</span>
+            <h2 id="authTitle">Sign Up</h2>
+            
+            <!-- LOGIN VIEW -->
+            <div id="loginView" style="display: none;">
+                <div id="loginError" class="msg-box msg-error"></div>
+                <form id="loginForm">
+                    <div class="form-group"><label>Email</label><input type="email" id="loginEmail" class="form-control" placeholder="Enter email" required></div>
+                    <div class="form-group"><label>Password</label><input type="password" id="loginPass" class="form-control" placeholder="Enter password" required></div>
+                    <button type="button" class="submit-btn" onclick="performLogin()">Login</button>
+                </form>
+                <div class="auth-switch">Don't have an account? <span onclick="switchAuthMode('signup')">Sign Up</span></div>
+            </div>
+
+            <!-- SIGN UP VIEW -->
+            <div id="signupView">
                 <div id="signupError" class="msg-box msg-error"></div>
                 <form id="signupForm">
                     <div class="form-group"><label>Full Name</label><input type="text" id="regName" class="form-control" placeholder="Enter your name" required></div>
-                    <div class="form-group"><label>Email Address</label><input type="email" id="regEmail" class="form-control" placeholder="Enter valid email (No Temp Mail)" required></div>
+                    <div class="form-group"><label>Email Address</label><input type="email" id="regEmail" class="form-control" placeholder="Enter valid email" required></div>
                     <div class="form-group"><label>Password</label><input type="password" id="regPass" class="form-control" placeholder="Create a password" required></div>
-                    <button type="button" class="submit-btn" id="sendOtpBtn" onclick="sendOTP()">Send OTP Code</button>
+                    <button type="button" class="submit-btn" onclick="registerUser()">Create Account</button>
                 </form>
+                <div class="auth-switch">Already have an account? <span onclick="switchAuthMode('login')">Login</span></div>
             </div>
-            <div id="signupStep2" style="display: none;">
-                <p style="margin-bottom: 20px; font-size: 0.9rem;">We sent a code to <span id="userEmailSpan" style="color: var(--primary);"></span></p>
-                <div class="form-group"><label>Enter 4-Digit Code</label><input type="text" id="otpCodeInput" class="form-control" placeholder="XXXX" style="text-align: center; letter-spacing: 5px; font-size: 1.2rem;"></div>
-                <button type="button" class="submit-btn" onclick="verifyOTP()">Verify & Create</button>
+        </div>
+    </div>
+
+    <!-- USER DASHBOARD MODAL -->
+    <div id="dashboardModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('dashboardModal')">&times;</span>
+            <h2>My Account</h2>
+            
+            <div class="tab-header">
+                <button class="tab-btn active" onclick="openTab('profileTab')">Personal Details</button>
+                <button class="tab-btn" onclick="openTab('ordersTab')">Orders</button>
             </div>
-            <div id="signupStep3" style="display: none; text-align: center;">
-                <i class="fa-solid fa-circle-check" style="font-size: 3rem; color: #22c55e; margin-bottom: 15px;"></i><h3>Account Created!</h3>
+
+            <!-- Profile Tab -->
+            <div id="profileTab" class="tab-content active">
+                <div class="profile-info-row">
+                    <span class="profile-label">Name</span>
+                    <span class="profile-val" id="profileNameDisplay">User</span>
+                </div>
+                <div class="profile-info-row">
+                    <span class="profile-label">Email</span>
+                    <span class="profile-val" id="profileEmailDisplay">user@example.com</span>
+                </div>
+                <div class="profile-info-row">
+                    <span class="profile-label">Member Since</span>
+                    <span class="profile-val">Feb 2026</span>
+                </div>
+                <div class="profile-info-row">
+                    <span class="profile-label">Status</span>
+                    <span class="profile-val" style="color: #22c55e;">Active</span>
+                </div>
+                <button class="buy-btn" style="width: 100%; margin-top: 20px; border-color: #ef4444; color: #ef4444;" onclick="logout()">Logout</button>
+            </div>
+
+            <!-- Orders Tab -->
+            <div id="ordersTab" class="tab-content">
+                <div id="ordersListContainer">
+                    <!-- Orders will be injected here via JS -->
+                    <p style="text-align: center; color: var(--text-muted); margin-top: 20px;">No orders yet.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -505,7 +666,7 @@
             <h2>Choose Purchase Method</h2>
             <p style="margin-bottom: 25px;">How would you like to buy <span id="optProductName" style="color: var(--primary); font-weight: 700;">Product</span>?</p>
             <div class="buy-option-card" onclick="buyDirectWhatsApp()"><div class="buy-option-icon" style="color: #25d366;"><i class="fa-brands fa-whatsapp"></i></div><div style="flex-grow: 1;"><h3 style="font-size: 1.1rem; margin-bottom: 5px; color: var(--text-main);">Buy via WhatsApp</h3><p style="font-size: 0.85rem; color: var(--text-muted);">Chat directly with admin.</p></div><i class="fa-solid fa-chevron-right" style="color: var(--text-muted);"></i></div>
-            <div class="buy-option-card" onclick="openPaymentGateway()"><div class="buy-option-icon" style="color: var(--primary);"><i class="fa-solid fa-credit-card"></i></div><div style="flex-grow: 1;"><h3 style="font-size: 1.1rem; margin-bottom: 5px; color: var(--text-main);">Pay via Gateway</h3><p style="font-size: 0.85rem; color: var(--text-muted);">Easypaisa / JazzCash.</p></div><i class="fa-solid fa-chevron-right" style="color: var(--text-muted);"></i></div>
+            <div class="buy-option-card" onclick="openPaymentGateway()"><div class="buy-option-icon" style="color: var(--primary);"><i class="fa-solid fa-credit-card"></i></div><div style="flex-grow: 1;"><h3 style="font-size: 1.1rem; margin-bottom: 5px; color: var(--text-main);">Pay via Gateway</h3><p style="font-size: 0.85rem; color: var(--text-muted);">Easypaisa / JazzCash (Instant).</p></div><i class="fa-solid fa-chevron-right" style="color: var(--text-muted);"></i></div>
         </div>
     </div>
 
@@ -524,9 +685,9 @@
                 <div class="loader-spinner"></div>
                 <h3 style="color: var(--text-main);">Verifying Transaction...</h3>
                 <div class="verify-steps">
-                    <div class="verify-step" id="step1"><i class="fa-solid fa-circle-notch"></i> Checking Gateway...</div>
-                    <div class="verify-step" id="step2"><i class="fa-solid fa-magnifying-glass"></i> Validating ID Format...</div>
-                    <div class="verify-step" id="step3"><i class="fa-solid fa-check"></i> Verification Successful!</div>
+                    <div class="verify-step" id="step1"><i class="fa-solid fa-circle-notch"></i> Connecting to Gateway...</div>
+                    <div class="verify-step" id="step2"><i class="fa-solid fa-magnifying-glass"></i> Validating Trx ID...</div>
+                    <div class="verify-step" id="step3"><i class="fa-solid fa-check"></i> Payment Approved!</div>
                 </div>
             </div>
 
@@ -542,10 +703,10 @@
                 </div>
 
                 <div id="paymentDetailsBox" class="payment-details-box">
-                    <p>Send Amount to:</p>
+                    <p>Send Exact Amount to:</p>
                     <div class="account-number" onclick="copyToClipboard(this.innerText)">03377755004</div>
                     <div class="account-title" id="accTitleDisplay">Account Title: Muhammad Adeel</div>
-                    <span class="copy-hint">(Click number to copy)</span>
+                    <span class="copy-hint">(Tap number to copy)</span>
                 </div>
 
                 <form id="paymentForm">
@@ -555,7 +716,7 @@
                     </div>
                     <div class="form-group">
                         <label>Transaction ID (Trx ID)</label>
-                        <input type="text" id="payTrx" class="form-control" placeholder="e.g. 8483XXXXXX (11+ digits)" required>
+                        <input type="text" id="payTrx" class="form-control" placeholder="e.g. 8483XXXXXX" required>
                     </div>
                     <button type="submit" class="submit-btn" id="paySubmitBtn">Verify Payment</button>
                 </form>
@@ -568,20 +729,240 @@
         <div class="modal-content">
             <span class="close" onclick="closeModal('capcutModal')">&times;</span>
             <h2>Select CapCut Plan</h2>
-            <div class="plan-option-btn" onclick="initiateBuyProcess('CapCut Pro 1 Month', '1.00'); closeModal('capcutModal');"><span>1 Month Access</span><span style="color: var(--primary);">$1.00</span></div>
-            <div class="plan-option-btn" style="border-color: var(--primary);" onclick="initiateBuyProcess('CapCut Pro 6 Months', '5.00'); closeModal('capcutModal');"><span>6 Months Access</span><span style="color: var(--primary);">$5.00</span></div>
+            <div class="plan-option-btn" onclick="initiateBuyProcess('CapCut Pro 1 Month', '1.00'); closeModal('capcutModal');">
+                <div><span>1 Month Access</span><br><small style="color:var(--text-muted); font-weight:400;">Standard Plan</small></div>
+                <span style="color: var(--primary); font-size: 1.1rem;">$1.00</span>
+            </div>
+            <div class="plan-option-btn" style="border-color: var(--primary);" onclick="initiateBuyProcess('CapCut Pro 6 Months', '5.00'); closeModal('capcutModal');">
+                <div><span>6 Months Access</span><br><small style="color:var(--text-muted); font-weight:400;">Best Value</small></div>
+                <span style="color: var(--primary); font-size: 1.1rem;">$5.00</span>
+            </div>
         </div>
     </div>
 
-    <div id="privacyModal" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('privacyModal')">&times;</span><h2>Privacy Policy</h2><p>Data secured.</p></div></div>
-    <div id="termsModal" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('termsModal')">&times;</span><h2>Terms of Service</h2><p>No refunds.</p></div></div>
+    <div id="privacyModal" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('privacyModal')">&times;</span><h2>Privacy Policy</h2><p>Your data is secured with end-to-end encryption. We do not share your details.</p></div></div>
+    <div id="termsModal" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('termsModal')">&times;</span><h2>Terms of Service</h2><p>All sales are final. Digital goods are delivered instantly upon payment verification.</p></div></div>
 
     <script>
-        function toggleTheme() { document.body.classList.toggle('light-mode'); const icon = document.getElementById('themeIcon'); icon.classList.toggle('fa-sun'); icon.classList.toggle('fa-moon'); }
+        // --- PERSISTENT DATA STORAGE (Local Storage) ---
+        // Simulating a backend database in browser memory
+        const DB_USERS_KEY = "digitalApex_users";
+        const DB_SESSION_KEY = "digitalApex_session";
+
+        function getUsers() {
+            return JSON.parse(localStorage.getItem(DB_USERS_KEY)) || [];
+        }
+
+        function saveUser(user) {
+            const users = getUsers();
+            users.push(user);
+            localStorage.setItem(DB_USERS_KEY, JSON.stringify(users));
+        }
+
+        function getCurrentUser() {
+            return JSON.parse(localStorage.getItem(DB_SESSION_KEY));
+        }
+
+        function setCurrentUser(user) {
+            localStorage.setItem(DB_SESSION_KEY, JSON.stringify(user));
+        }
+
+        function clearSession() {
+            localStorage.removeItem(DB_SESSION_KEY);
+        }
+
+        // Save order to SPECIFIC user in persistent DB
+        function saveOrderToHistory(order) {
+            const currentUser = getCurrentUser();
+            if(!currentUser) return;
+
+            // Update Global DB
+            const users = getUsers();
+            const userIndex = users.findIndex(u => u.email === currentUser.email);
+            
+            if(userIndex !== -1) {
+                if(!users[userIndex].orders) users[userIndex].orders = [];
+                users[userIndex].orders.unshift(order);
+                localStorage.setItem(DB_USERS_KEY, JSON.stringify(users));
+                
+                // Update Session
+                currentUser.orders = users[userIndex].orders;
+                setCurrentUser(currentUser);
+            }
+        }
+
+        // --- THEME & MENU ---
+        function toggleTheme() { 
+            document.body.classList.toggle('light-mode'); 
+            const icon = document.getElementById('themeIcon'); 
+            if(document.body.classList.contains('light-mode')) {
+                icon.classList.remove('fa-moon'); icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun'); icon.classList.add('fa-moon');
+            }
+        }
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('active');
+            const overlay = document.getElementById('sidebarOverlay');
+            if(overlay.style.display === 'block') {
+                overlay.style.opacity = '0';
+                setTimeout(() => { overlay.style.display = 'none'; }, 300);
+            } else {
+                overlay.style.display = 'block';
+                setTimeout(() => { overlay.style.opacity = '1'; }, 10);
+            }
+        }
+
+        // --- MODAL UTILS ---
         function openModal(id) { document.getElementById(id).style.display = 'block'; }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
         window.onclick = function(e) { if(e.target.classList.contains('modal')) e.target.style.display = 'none'; }
 
+        // --- AUTHENTICATION LOGIC ---
+        function handleAuthClick() {
+            toggleMenu(); // Close sidebar
+            const user = getCurrentUser();
+            if(user) {
+                // If logged in, open Dashboard
+                updateDashboard();
+                openModal('dashboardModal');
+            } else {
+                // If not logged in, open Auth Modal
+                switchAuthMode('signup');
+                openModal('authModal');
+            }
+        }
+
+        function switchAuthMode(mode) {
+            document.querySelectorAll('.msg-box').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('input').forEach(el => el.value = '');
+            
+            if(mode === 'login') {
+                document.getElementById('authTitle').innerText = "Login";
+                document.getElementById('signupView').style.display = 'none';
+                document.getElementById('loginView').style.display = 'block';
+            } else {
+                document.getElementById('authTitle').innerText = "Sign Up";
+                document.getElementById('loginView').style.display = 'none';
+                document.getElementById('signupView').style.display = 'block';
+            }
+        }
+
+        // LOGIN
+        function performLogin() {
+            const email = document.getElementById('loginEmail').value.trim();
+            const pass = document.getElementById('loginPass').value.trim();
+            const errorBox = document.getElementById('loginError');
+            
+            if(!email || !pass) return;
+
+            const users = getUsers();
+            const user = users.find(u => u.email === email && u.password === pass);
+
+            if(user) {
+                setCurrentUser(user);
+                closeModal('authModal');
+                updateUserUI();
+                alert("Login Successful!");
+            } else {
+                errorBox.innerText = "Invalid Email or Password.";
+                errorBox.style.display = 'block';
+            }
+        }
+
+        // REGISTER (Direct, No OTP)
+        function registerUser() {
+            const name = document.getElementById('regName').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const pass = document.getElementById('regPass').value.trim();
+            const errorBox = document.getElementById('signupError');
+            
+            if(!name || !email || !pass) {
+                errorBox.innerText = "Please fill all fields.";
+                errorBox.style.display = 'block';
+                return;
+            }
+
+            // Check if user exists
+            const users = getUsers();
+            if(users.some(u => u.email === email)) {
+                errorBox.innerText = "Email already registered. Please Login.";
+                errorBox.style.display = 'block';
+                return;
+            }
+
+            // Create New User
+            const newUser = {
+                name: name,
+                email: email,
+                password: pass,
+                orders: []
+            };
+            saveUser(newUser);
+            setCurrentUser(newUser); // Auto Login
+
+            closeModal('authModal');
+            updateUserUI();
+            alert("Account Created Successfully!");
+        }
+
+        function logout() {
+            clearSession();
+            closeModal('dashboardModal');
+            updateUserUI();
+        }
+
+        function updateUserUI() {
+            const link = document.getElementById('menuAuthLink');
+            const user = getCurrentUser();
+            if(user) {
+                link.innerHTML = '<i class="fa-solid fa-user-check"></i> My Account';
+            } else {
+                link.innerHTML = '<i class="fa-solid fa-user"></i> Sign Up / Login';
+            }
+        }
+        
+        // Init UI on load
+        updateUserUI();
+
+        // --- DASHBOARD LOGIC ---
+        function openTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        function updateDashboard() {
+            const user = getCurrentUser();
+            if(!user) return;
+            
+            document.getElementById('profileNameDisplay').innerText = user.name;
+            document.getElementById('profileEmailDisplay').innerText = user.email;
+            
+            // Render Orders
+            const container = document.getElementById('ordersListContainer');
+            const orders = user.orders || [];
+            
+            if(orders.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--text-muted); margin-top: 20px;">No orders yet.</p>';
+            } else {
+                let html = '';
+                orders.forEach(order => {
+                    html += `
+                    <div class="order-item">
+                        <div class="order-details">
+                            <h5>${order.item}</h5>
+                            <p>$${order.price} • ${order.date}</p>
+                        </div>
+                        <span class="order-status ${order.status === 'Verified' ? 'status-verified' : 'status-pending'}">${order.status}</span>
+                    </div>`;
+                });
+                container.innerHTML = html;
+            }
+        }
+
+        // --- BUY & PAYMENT LOGIC ---
         let currentProduct = "", currentPrice = "", selectedMethod = "";
 
         function initiateBuyProcess(product, price) {
@@ -597,6 +978,16 @@
 
         function openPaymentGateway() {
             closeModal('buyOptionsModal');
+            
+            const user = getCurrentUser();
+            // Require Login for Gateway Payment
+            if(!user) {
+                alert("Please Sign Up or Login to complete purchase.");
+                switchAuthMode('signup');
+                openModal('authModal');
+                return;
+            }
+
             document.getElementById('payProductPrice').innerText = "$" + currentPrice;
             document.getElementById('paymentMainContent').style.display = 'block';
             document.getElementById('verificationScreen').style.display = 'none';
@@ -614,12 +1005,12 @@
             const details = document.getElementById('paymentDetailsBox');
             details.style.display = 'block';
             details.querySelector('.account-number').innerText = number;
-            document.getElementById('accTitleDisplay').innerText = "Account Title: " + title;
+            document.getElementById('accTitleDisplay').innerText = "Title: " + title;
         }
 
         function copyToClipboard(text) { navigator.clipboard.writeText(text); alert("Number copied: " + text); }
 
-        // --- STRICT VERIFICATION LOGIC ---
+        // --- PAYMENT SUBMISSION & ORDER GENERATION ---
         const payForm = document.getElementById('paymentForm');
         payForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -629,29 +1020,26 @@
             errorBox.style.display = 'none';
 
             if(!selectedMethod) {
-                errorBox.innerText = "Please select a Payment Method (Easypaisa/JazzCash).";
+                errorBox.innerText = "Please select Easypaisa or JazzCash.";
                 errorBox.style.display = 'block';
                 return;
             }
 
-            // 1. Strict Regex for Phone Number (Pakistan Format)
             const phoneRegex = /^(03)[0-9]{9}$/;
             if (!phoneRegex.test(sender)) {
-                errorBox.innerText = "Invalid Sender Number. Must start with 03 and have 11 digits.";
+                errorBox.innerText = "Invalid Number. Must be 11 digits (03...).";
                 errorBox.style.display = 'block';
                 return;
             }
 
-            // 2. Strict Regex for Transaction ID (Numeric, 11-12+ digits)
-            // Accepts at least 11 digits. Cannot be short "123"
             const trxRegex = /^[0-9]{11,}$/;
             if (!trxRegex.test(trx)) {
-                errorBox.innerText = "Invalid Transaction ID. Trx ID must be at least 11 digits (only numbers).";
+                errorBox.innerText = "Invalid Trx ID. Must be numeric (11+ digits).";
                 errorBox.style.display = 'block';
                 return;
             }
 
-            // If Passed, Show Animation
+            // START VERIFICATION
             document.getElementById('paymentMainContent').style.display = 'none';
             document.getElementById('verificationScreen').style.display = 'block';
 
@@ -665,12 +1053,23 @@
                 document.getElementById('step3').classList.add('active');
                 document.querySelector('.loader-spinner').style.borderColor = "#22c55e";
                 document.querySelector('.loader-spinner').style.borderLeftColor = "#22c55e";
+                
+                // --- ADD ORDER TO HISTORY (PERSISTENT) ---
+                const newOrder = {
+                    item: currentProduct,
+                    price: currentPrice,
+                    date: new Date().toLocaleDateString(),
+                    status: 'Verified'
+                };
+                saveOrderToHistory(newOrder);
+                // -----------------------------
+
             }, 3000);
 
-            // Redirect to YOUR WhatsApp
+            // FINAL REDIRECT
             setTimeout(() => {
-                const msg = `*PAYMENT VERIFIED*\n\n📦 Product: ${currentProduct}\n💰 Amount: $${currentPrice}\n🏦 Method: ${selectedMethod}\n👤 Sender: ${sender}\n🆔 Trx ID: ${trx}\n\nPlease check verify and send credentials.`;
-                // Redirecting to YOUR WhatsApp (+12832219723)
+                const user = getCurrentUser();
+                const msg = `*NEW ORDER ALERT*\n\n📦 Product: ${currentProduct}\n💰 Amount: $${currentPrice}\n👤 User: ${user.name} (${user.email})\n------------------\n🏦 Method: ${selectedMethod}\n📱 Sender: ${sender}\n🆔 Trx ID: ${trx}\n\nPlease send credentials ASAP.`;
                 window.location.href = `https://wa.me/12832219723?text=${encodeURIComponent(msg)}`;
             }, 4000);
         });
@@ -684,21 +1083,6 @@
                 document.getElementById('formSuccessMessage').style.display = 'block';
             }, 1500);
         });
-
-        // OTP
-        function sendOTP() {
-            const email = document.getElementById('regEmail').value;
-            if(!email) return alert("Enter email");
-            if(["temp-mail.org", "yopmail.com"].some(d => email.includes(d))) return alert("No temp mail");
-            document.getElementById('signupStep1').style.display = 'none';
-            document.getElementById('signupStep2').style.display = 'block';
-            document.getElementById('userEmailSpan').innerText = email;
-        }
-        function verifyOTP() {
-            document.getElementById('signupStep2').style.display = 'none';
-            document.getElementById('signupStep3').style.display = 'block';
-            setTimeout(() => closeModal('signupModal'), 2000);
-        }
     </script>
 </body>
 </html>
