@@ -7,13 +7,9 @@
     <!-- SEO OPTIMIZATION START -->
     <title>Digital Apex | Premium Accounts & Virtual Numbers Store</title>
     <meta name="description" content="Buy CapCut Pro, ChatGPT Plus, Netflix, Canva Admin, and Virtual Numbers (OTP) at the best prices. Instant Delivery via Digital Apex.">
-    <meta name="keywords" content="Digital Apex, CapCut Pro, Virtual Numbers, OTP Buy, Netflix Account, Cheap Subscriptions, Canva Admin Panel, GitHub Student Pack">
-    <meta name="author" content="Digital Apex">
-    <meta name="robots" content="index, follow">
     
     <!-- Open Graph for Social Media -->
     <meta property="og:title" content="Digital Apex - Premium Store">
-    <meta property="og:description" content="Get Premium Tools & Numbers Instantly. Trusted Service.">
     <meta property="og:image" content="logo.png">
     <meta property="og:type" content="website">
 
@@ -22,453 +18,330 @@
     
     <!-- Icons & Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <style>
-        /* --- CSS VARIABLES --- */
+        /* --- THEME VARIABLES --- */
         :root {
-            --bg-body: #0b0f19;
-            --bg-card: #151b2b;
-            --primary: #00dc82; 
-            --accent: #36e4da;
-            --text-main: #ffffff;
-            --text-muted: #94a3b8;
-            --border: #1e293b;
-            --input-bg: #0f141f;
-            /* Instagram Gradient */
-            --insta-grad: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            /* Professional Tech Dark Theme */
+            --bg-body: #0B1120;
+            --bg-nav: rgba(11, 17, 32, 0.95);
+            --bg-card: #1E293B;
+            --bg-card-hover: #334155;
+            
+            --primary: #3B82F6; 
+            --primary-hover: #2563EB;
+            --accent: #06B6D4; 
+            
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+            --border: rgba(148, 163, 184, 0.15);
+            
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            --input-bg: #0f172a;
+            --input-text: #fff;
+        }
+
+        /* --- LIGHT MODE VARIABLES --- */
+        body.light-mode {
+            --bg-body: #F1F5F9;
+            --bg-nav: rgba(255, 255, 255, 0.95);
+            --bg-card: #FFFFFF;
+            --bg-card-hover: #F8FAFC;
+            
+            --primary: #2563EB;
+            --primary-hover: #1D4ED8;
+            --accent: #0891B2;
+            
+            --text-main: #0F172A;
+            --text-muted: #64748B;
+            --border: rgba(0, 0, 0, 0.1);
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            --input-bg: #F1F5F9;
+            --input-text: #333;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Outfit', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
         body {
             background-color: var(--bg-body);
             color: var(--text-main);
             overflow-x: hidden;
-            line-height: 1.5;
-            background-image: radial-gradient(circle at top right, rgba(0, 220, 130, 0.05), transparent 40%);
+            line-height: 1.6;
         }
 
         a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
 
-        /* --- PROFESSIONAL NAVBAR --- */
+        /* --- NAVBAR --- */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 5%;
-            background: rgba(11, 15, 25, 0.95);
+            padding: 15px 5%;
+            background: var(--bg-nav);
             position: sticky;
             top: 0;
             z-index: 1000;
             border-bottom: 1px solid var(--border);
             backdrop-filter: blur(15px);
-            height: 100px;
+            height: 90px;
         }
 
-        /* Center Logo Logic */
         .logo-container {
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
+            z-index: 1001;
+            display: flex;
+            align-items: center;
         }
-
         .logo img {
-            height: 150px; /* Big Size Maintained */
-            vertical-align: middle;
-            filter: drop-shadow(0 0 10px rgba(0, 220, 130, 0.2));
+            height: 80px; 
+            width: auto;
+            filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.2));
             transition: transform 0.3s ease;
         }
         .logo img:hover { transform: scale(1.05); }
 
-        /* Right Side Buttons Container */
-        .nav-actions {
-            margin-left: auto;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+        .nav-actions { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+        .nav-left { display: flex; align-items: center; gap: 12px; }
 
-        /* Button Styles */
         .nav-btn {
             padding: 10px 20px;
-            border-radius: 50px;
+            border-radius: 8px;
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             display: flex;
             align-items: center;
             gap: 8px;
-            border: 1px solid transparent;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-main);
         }
+        .btn-primary { background: var(--primary); color: #fff; border: none; }
+        .btn-primary:hover { background: var(--primary-hover); transform: translateY(-2px); }
+        .btn-theme { font-size: 1.2rem; padding: 10px; border-radius: 50%; width: 45px; height: 45px; justify-content: center; }
+        .btn-theme:hover { background: var(--bg-card-hover); }
 
-        /* WhatsApp Button */
-        .btn-wa {
-            background: rgba(0, 220, 130, 0.1);
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-        .btn-wa:hover {
-            background: var(--primary);
-            color: #000;
-            box-shadow: 0 0 15px rgba(0, 220, 130, 0.3);
-        }
-
-        /* Instagram Button */
-        .btn-insta {
-            background: rgba(255,255,255,0.05);
-            color: #fff;
-            border-color: rgba(255,255,255,0.2);
-        }
-        .btn-insta:hover {
-            background: var(--insta-grad);
-            border-color: transparent;
-            box-shadow: 0 0 15px rgba(220, 39, 67, 0.4);
-            transform: translateY(-2px);
-        }
-
-        @media (max-width: 768px) {
-            nav {
-                flex-direction: column;
-                height: auto;
-                gap: 15px;
-                padding: 15px;
-            }
-            .logo-container { position: static; transform: none; }
-            .nav-actions { margin: 0 auto; }
+        /* --- MOBILE NAV FIXES --- */
+        @media (max-width: 900px) {
+            nav { padding: 10px 15px; height: 75px; }
+            .logo img { height: 50px; }
+            .nav-left { display: flex !important; }
+            .nav-btn span { display: none; } 
+            .nav-btn { padding: 8px; width: 40px; height: 40px; justify-content: center; }
+            .mobile-hide { display: none !important; }
         }
 
         /* --- HERO SECTION --- */
-        .hero {
-            text-align: center;
-            padding: 60px 20px 40px;
-        }
+        .hero { text-align: center; padding: 80px 20px 50px; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; font-weight: 800; line-height: 1.1; color: var(--text-main); }
+        .hero h1 span { color: var(--primary); }
+        .hero p { color: var(--text-muted); font-size: 1.2rem; max-width: 600px; margin: 0 auto 30px; }
 
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            font-weight: 800;
-            letter-spacing: -1px;
-            line-height: 1.1;
-        }
-
-        .hero h1 span { color: var(--accent); }
-
-        .hero p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            max-width: 550px;
-            margin: 0 auto 30px;
-        }
-
-        /* --- FEATURES --- */
-        .features-strip {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            padding: 15px 0;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            background: rgba(21, 27, 43, 0.5);
-            margin-bottom: 40px;
-        }
-        .feature-item {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            font-weight: 500;
-            display: flex;
+        .mobile-support-btn {
+            display: none;
+            margin: 0 auto 30px auto;
+            background: rgba(37, 211, 102, 0.15);
+            color: #25d366;
+            border: 1px solid #25d366;
+            padding: 10px 20px;
+            border-radius: 50px;
+            width: fit-content;
+            font-weight: 600;
             align-items: center;
             gap: 8px;
         }
+        @media (max-width: 900px) { .mobile-support-btn { display: flex; } }
+
+        .features-strip { display: flex; justify-content: center; gap: 30px; margin-bottom: 60px; flex-wrap: wrap; }
+        .feature-item {
+            background: var(--bg-card); border: 1px solid var(--border); padding: 12px 25px; border-radius: 50px;
+            color: var(--text-main); font-size: 0.9rem; font-weight: 500; display: flex; align-items: center; gap: 10px;
+            box-shadow: var(--shadow);
+        }
         .feature-item i { color: var(--primary); }
 
-        /* --- LAYOUT --- */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px 60px;
-        }
+        /* --- LAYOUT & CARDS --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px 80px; }
+        .section-header { margin-bottom: 40px; text-align: center; }
+        .section-header h2 { font-size: 2rem; font-weight: 700; color: var(--text-main); }
+        .section-header p { color: var(--text-muted); margin-top: 8px; }
 
-        .section-header {
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
 
-        .section-line {
-            height: 30px;
-            width: 4px;
-            background: linear-gradient(to bottom, var(--primary), var(--accent));
-            border-radius: 2px;
-        }
-
-        .section-header h2 { font-size: 1.8rem; font-weight: 700; color: #fff; }
-        .section-header p { color: var(--text-muted); font-size: 0.95rem; }
-
-        /* --- GRID --- */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        /* --- CARDS --- */
         .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 25px;
-            position: relative;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 25px;
+            position: relative; transition: all 0.3s ease; display: flex; flex-direction: column; overflow: hidden;
+            box-shadow: var(--shadow);
         }
-
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-        }
-
-        .card::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; height: 1px;
-            background: linear-gradient(90deg, transparent, var(--primary), transparent);
-            opacity: 0;
-            transition: 0.3s;
-        }
-        .card:hover::after { opacity: 1; }
+        .card:hover { transform: translateY(-5px); border-color: var(--primary); background: var(--bg-card-hover); }
 
         .badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(255, 71, 87, 0.15);
-            color: #ff4757;
-            font-size: 0.7rem;
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border: 1px solid rgba(255, 71, 87, 0.3);
+            position: absolute; top: 20px; right: 20px; background: rgba(59, 130, 246, 0.1); color: var(--primary);
+            font-size: 0.75rem; padding: 5px 12px; border-radius: 6px; font-weight: 700; text-transform: uppercase;
         }
+        .badge.best-seller { background: var(--primary); color: #fff; }
 
-        .badge.best-seller { 
-            background: rgba(0, 220, 130, 0.15); 
-            color: var(--primary); 
-            border-color: rgba(0, 220, 130, 0.3);
-        }
-
-        .card-top {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
+        .card-top { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
         .icon-box {
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.5rem;
-            color: var(--text-main);
+            width: 55px; height: 55px; background: rgba(148, 163, 184, 0.1); border-radius: 12px;
+            display: flex; justify-content: center; align-items: center; font-size: 1.8rem; color: var(--text-main);
         }
         
-        .card h3 { font-size: 1.25rem; font-weight: 700; line-height: 1.2; }
-        .card ul { list-style: none; margin-bottom: 20px; flex-grow: 1; }
-        .card ul li { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 8px; display: flex; align-items: center; }
+        /* LOGO IMAGES (FIXED) */
+        .logo-img-fix { width: 35px; height: 35px; object-fit: contain; }
+
+        .card h3 { font-size: 1.3rem; font-weight: 700; color: var(--text-main); }
+        .card ul { list-style: none; margin-bottom: 25px; flex-grow: 1; }
+        .card ul li { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 10px; display: flex; align-items: center; }
         .card ul li i { color: var(--primary); margin-right: 10px; font-size: 0.8rem; }
 
-        .price-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-top: auto;
-        }
-
-        .price-tag { font-size: 1.6rem; font-weight: 800; color: #fff; }
-        .price-tag span { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; }
+        .price-row { display: flex; justify-content: space-between; align-items: center; margin-top: auto; border-top: 1px solid var(--border); padding-top: 20px; }
+        .price-tag { font-size: 1.6rem; font-weight: 700; color: var(--text-main); }
+        .price-tag span { font-size: 0.9rem; color: var(--text-muted); font-weight: 400; }
 
         .buy-btn {
-            display: inline-block;
-            background: var(--primary);
-            color: #000;
-            padding: 10px 20px;
-            border-radius: 6px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            transition: 0.3s;
-            border: 1px solid var(--primary);
-            text-align: center;
-            min-width: 100px;
+            display: inline-block; background: var(--primary); color: #fff; padding: 10px 24px; border-radius: 8px;
+            font-weight: 600; font-size: 0.9rem; transition: 0.3s; border: none; cursor: pointer; text-align: center;
         }
-        .buy-btn:hover {
-            background: #00b368;
-            border-color: #00b368;
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0, 220, 130, 0.4);
-        }
+        .buy-btn:hover { background: var(--primary-hover); }
 
         /* --- VIRTUAL NUMBERS --- */
         .country-bar {
-            background: var(--bg-card);
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            border: 1px solid var(--border);
+            background: var(--bg-card); padding: 20px; border-radius: 12px; margin-bottom: 40px;
+            display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; border: 1px solid var(--border); box-shadow: var(--shadow);
         }
-        
         .country-flag {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            background: rgba(0,0,0,0.3);
-            padding: 6px 15px;
-            border-radius: 4px;
-            border: 1px solid var(--border);
-            cursor: default;
+            font-size: 0.9rem; color: var(--text-main); background: var(--bg-card-hover); padding: 8px 16px; border-radius: 6px; border: 1px solid var(--border); cursor: default;
         }
+        .app-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+        .app-grid .card { padding: 25px; align-items: center; text-align: center; }
+        .app-grid .icon-box { font-size: 2rem; background: transparent; margin-bottom: 15px; color: var(--primary); }
+        .app-grid h4 { margin-bottom: 15px; font-size: 1.1rem; color: var(--text-main); }
+        .app-grid .buy-btn { width: 100%; background: transparent; border: 1px solid var(--primary); color: var(--primary); }
+        .app-grid .buy-btn:hover { background: var(--primary); color: #fff; }
 
-        .app-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
-        .app-grid .card { padding: 20px; align-items: center; text-align: center; }
-        .app-grid .icon-box { font-size: 2rem; background: transparent; margin-bottom: 10px; color: var(--primary); }
-        .app-grid h4 { margin-bottom: 15px; font-size: 1.1rem; }
-
-        /* --- CONTACT FORM SECTION --- */
+        /* --- CONTACT FORM --- */
         .contact-section {
-            background: var(--bg-card);
-            padding: 40px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            max-width: 800px;
-            margin: 0 auto;
+            background: var(--bg-card); padding: 40px; border-radius: 16px; border: 1px solid var(--border);
+            max-width: 700px; margin: 0 auto; box-shadow: var(--shadow);
         }
         .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; color: var(--text-muted); margin-bottom: 8px; font-size: 0.9rem; }
+        .form-group label { display: block; color: var(--text-main); margin-bottom: 8px; font-weight: 500; }
         .form-control {
-            width: 100%;
-            background: var(--input-bg);
-            border: 1px solid var(--border);
-            padding: 12px;
-            border-radius: 6px;
-            color: #fff;
-            outline: none;
-            transition: 0.3s;
+            width: 100%; background: var(--input-bg); border: 1px solid var(--border); padding: 14px;
+            border-radius: 8px; color: var(--input-text); outline: none; transition: 0.3s;
         }
         .form-control:focus { border-color: var(--primary); }
         .submit-btn {
-            width: 100%;
-            background: var(--primary);
-            color: #000;
-            padding: 15px;
-            border: none;
-            border-radius: 6px;
-            font-weight: 700;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: 0.3s;
+            width: 100%; background: var(--primary); color: #fff; padding: 15px; border: none;
+            border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 1rem; transition: 0.3s;
         }
-        .submit-btn:hover { background: #00b368; }
+        .submit-btn:hover { background: var(--primary-hover); }
 
-        /* Success Message Box */
-        .success-message {
-            display: none; /* Hidden by default */
-            text-align: center;
-            padding: 30px;
-            background: rgba(0, 220, 130, 0.1);
-            border: 1px solid var(--primary);
-            border-radius: 12px;
-            color: #fff;
-        }
-        .success-message i { font-size: 3rem; color: var(--primary); margin-bottom: 15px; }
-        .success-message h3 { margin-bottom: 10px; color: var(--primary); }
-
-        /* --- MODAL (Privacy/Terms) Styles --- */
+        /* --- MODALS --- */
         .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 2000; 
-            left: 0; top: 0; width: 100%; height: 100%; 
-            background-color: rgba(0,0,0,0.8); 
-            backdrop-filter: blur(5px);
+            display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px);
         }
         .modal-content {
-            background-color: var(--bg-card);
-            margin: 10% auto;
-            padding: 40px;
-            border: 1px solid var(--primary);
-            width: 80%;
-            max-width: 600px;
-            border-radius: 12px;
-            color: var(--text-muted);
-            position: relative;
+            background-color: var(--bg-card); margin: 5% auto; padding: 35px; border: 1px solid var(--border);
+            width: 90%; max-width: 500px; border-radius: 16px; color: var(--text-muted); position: relative;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5); max-height: 90vh; overflow-y: auto;
         }
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .close:hover { color: #fff; }
-        .modal h2 { color: #fff; margin-bottom: 15px; }
+        .close { color: var(--text-muted); float: right; font-size: 28px; cursor: pointer; }
+        .close:hover { color: var(--primary); }
+        .modal h2 { color: var(--text-main); margin-bottom: 20px; }
 
-        /* --- FOOTER --- */
+        /* --- PAYMENT & BUY OPTIONS --- */
+        .buy-option-card {
+            display: flex; align-items: center; justify-content: space-between; padding: 20px;
+            background: var(--bg-card-hover); border: 1px solid var(--border); border-radius: 12px;
+            margin-bottom: 15px; cursor: pointer; transition: 0.3s;
+        }
+        .buy-option-card:hover { border-color: var(--primary); transform: translateX(5px); }
+        .buy-option-icon { font-size: 2rem; margin-right: 15px; width: 40px; text-align: center; }
+
+        .payment-methods-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px;
+        }
+        .payment-method-card {
+            background: var(--bg-card-hover); border: 1px solid var(--border); border-radius: 12px;
+            padding: 15px; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: all 0.3s; height: 100px;
+        }
+        .payment-method-card:hover { border-color: var(--primary); background: rgba(59, 130, 246, 0.1); }
+        .payment-method-card.selected { border-color: var(--primary); background: rgba(59, 130, 246, 0.2); box-shadow: 0 0 10px rgba(59, 130, 246, 0.2); }
+        
+        .pm-logo { font-weight: 800; font-size: 1.1rem; color: var(--text-main); }
+        
+        .payment-details-box {
+            background: rgba(0,0,0,0.2); padding: 20px; border-radius: 12px; border: 1px solid var(--border);
+            margin-bottom: 20px; display: none; text-align: center;
+        }
+        .account-number { font-size: 1.5rem; font-weight: 700; color: var(--primary); letter-spacing: 1px; margin: 10px 0; user-select: all; cursor: pointer; }
+        .account-title { font-size: 0.9rem; color: var(--text-muted); }
+        
+        /* Verification Loader */
+        .verification-loader { display: none; text-align: center; padding: 30px; }
+        .loader-spinner {
+            border: 4px solid rgba(255,255,255,0.1); border-left-color: var(--primary);
+            border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto 20px;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .verify-steps { text-align: left; margin-top: 20px; color: var(--text-muted); font-size: 0.85rem; }
+        .verify-step { margin-bottom: 5px; display: flex; align-items: center; gap: 8px; opacity: 0.5; }
+        .verify-step.active { opacity: 1; color: var(--primary); font-weight: 600; }
+        .verify-step.done { opacity: 1; color: #22c55e; }
+        .verify-step.error { opacity: 1; color: #ef4444; }
+
+        .plan-option-btn {
+            display: block; width: 100%; padding: 15px; margin-bottom: 10px; border-radius: 8px;
+            background: var(--bg-card-hover); border: 1px solid var(--border); color: var(--text-main);
+            text-align: left; cursor: pointer; font-weight: 600; display: flex; justify-content: space-between;
+        }
+        .plan-option-btn:hover { border-color: var(--primary); background: rgba(59, 130, 246, 0.1); }
+        
         footer {
-            background: #080b12;
-            padding: 40px 20px;
-            text-align: center;
-            border-top: 1px solid var(--border);
-            color: var(--text-muted);
-            margin-top: 60px;
+            background: var(--bg-nav); padding: 50px 20px; text-align: center; border-top: 1px solid var(--border);
+            color: var(--text-muted); margin-top: 80px;
         }
-        .footer-logo { display: block; margin: 0 auto 15px auto; height: 60px; }
-        .footer-links a { color: var(--text-muted); margin: 0 10px; font-size: 0.9rem; cursor: pointer; }
-        .footer-links a:hover { color: var(--primary); }
+        .footer-logo { display: block; margin: 0 auto 20px auto; height: 60px; filter: grayscale(100%); opacity: 0.7; transition: 0.3s; }
+        .footer-logo:hover { filter: grayscale(0%); opacity: 1; }
+        .footer-links a { margin: 0 10px; }
 
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.2rem; }
-            .grid { grid-template-columns: 1fr; }
-            .modal-content { width: 95%; margin: 20% auto; }
-        }
+        .msg-box { display: none; padding: 15px; border-radius: 8px; margin-bottom: 15px; text-align: center; font-size: 0.9rem; }
+        .msg-error { background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid #ef4444; }
+        .success-message { display: none; text-align: center; padding: 30px; background: rgba(34, 197, 94, 0.1); border: 1px solid #22c55e; border-radius: 12px; color: #fff; }
+        .success-message h3 { color: #22c55e; margin-bottom: 10px; }
+        .success-message i { font-size: 3rem; color: #22c55e; margin-bottom: 15px; }
+
     </style>
 </head>
 <body>
 
     <!-- Navigation -->
     <nav>
-        <!-- Logo Centered -->
-        <div class="logo-container">
-            <div class="logo">
-                <img src="logo.png" alt="Digital Apex Logo">
-            </div>
+        <div class="nav-left">
+            <button class="nav-btn btn-theme" onclick="toggleTheme()"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
         </div>
-
-        <!-- Right Side Buttons -->
+        <div class="logo-container">
+            <a href="#" class="logo"><img src="logo.png" alt="Digital Apex Logo"></a>
+        </div>
         <div class="nav-actions">
-            <!-- Instagram Button -->
-            <a href="https://instagram.com/digital.apex0" target="_blank" class="nav-btn btn-insta">
-                <i class="fa-brands fa-instagram"></i> Instagram
-            </a>
-            
-            <!-- WhatsApp Button -->
-            <a href="https://wa.me/12832219723" target="_blank" class="nav-btn btn-wa">
-                <i class="fa-brands fa-whatsapp"></i> Support
+            <button class="nav-btn btn-signup btn-primary" onclick="openModal('signupModal')">
+                <i class="fa-solid fa-user-plus"></i> <span>Sign Up</span>
+            </button>
+            <a href="https://wa.me/12832219723" target="_blank" class="nav-btn mobile-hide" style="color: #25d366; border-color: #25d366;">
+                <i class="fa-brands fa-whatsapp"></i> <span>Support</span>
             </a>
         </div>
     </nav>
@@ -477,7 +350,7 @@
     <section class="hero">
         <h1>Welcome to <br> <span>DIGITAL APEX</span></h1>
         <p>Premium Digital Tools, Accounts & Virtual Numbers. Instant Delivery.</p>
-        
+        <a href="https://wa.me/12832219723" class="mobile-support-btn"><i class="fa-brands fa-whatsapp"></i> WhatsApp Support</a>
         <div class="features-strip">
             <div class="feature-item"><i class="fa-solid fa-bolt"></i> Fast</div>
             <div class="feature-item"><i class="fa-solid fa-shield-halved"></i> Secure</div>
@@ -486,367 +359,346 @@
     </section>
 
     <div class="container">
-
-        <!-- PREMIUM SUBSCRIPTIONS -->
-        <div class="section-header">
-            <div class="section-line"></div>
-            <div>
-                <h2>Premium Subscriptions</h2>
-                <p>Best prices for top-tier accounts.</p>
-            </div>
-        </div>
+        <div class="section-header"><h2>Premium Subscriptions</h2><p>Best prices for top-tier accounts.</p></div>
 
         <div class="grid">
-            
-            <!-- CapCut 1 Month -->
-            <div class="card">
-                <div class="card-top">
-                    <div class="icon-box"><i class="fa-solid fa-scissors"></i></div>
-                    <h3>CapCut Pro</h3>
-                </div>
-                <ul>
-                    <li><i class="fa-solid fa-check"></i> 1 Month Access</li>
-                    <li><i class="fa-solid fa-check"></i> Private Account</li>
-                </ul>
-                <div class="price-row">
-                    <div class="price-tag">$1.00 <span>/mo</span></div>
-                    <a href="https://wa.me/12832219723?text=Hi%20Digital%20Apex,%20I%20want%20CapCut%201%20Month." class="buy-btn">Buy Now</a>
-                </div>
+            <!-- CAPCUT PRO -->
+            <div class="card" style="border-color: var(--primary);">
+                <span class="badge best-seller">Top Seller</span>
+                <div class="card-top"><div class="icon-box" style="color: var(--primary);"><i class="fa-solid fa-scissors"></i></div><h3>CapCut Pro</h3></div>
+                <ul><li><i class="fa-solid fa-check"></i> 1 Month & 6 Months Plans</li><li><i class="fa-solid fa-check"></i> Private Account</li></ul>
+                <div class="price-row"><div class="price-tag">From $1.00</div><button class="buy-btn" onclick="openModal('capcutModal')">Buy Now</button></div>
             </div>
 
-            <!-- CapCut 6 Month -->
-            <div class="card" style="border-color: var(--primary); background: linear-gradient(to bottom right, #151b2b, rgba(0,220,130,0.05));">
-                <span class="badge best-seller">Best Deal</span>
-                <div class="card-top">
-                    <div class="icon-box" style="color: var(--primary);"><i class="fa-solid fa-film"></i></div>
-                    <h3>CapCut Pro</h3>
-                </div>
-                <ul>
-                    <li><i class="fa-solid fa-check"></i> 6 Months Validity</li>
-                    <li><i class="fa-solid fa-check"></i> Full Warranty</li>
-                    <li><i class="fa-solid fa-check"></i> Premium Features</li>
-                </ul>
-                <div class="price-row">
-                    <div class="price-tag" style="color: var(--primary);">$5.00</div>
-                    <a href="https://wa.me/12832219723?text=Hi%20Digital%20Apex,%20I%20want%20CapCut%206%20Months." class="buy-btn">Buy Now</a>
-                </div>
-            </div>
-
-            <!-- Amazon Prime Video -->
+            <!-- Prime Video -->
             <div class="card">
                 <span class="badge">New</span>
-                <div class="card-top">
-                    <div class="icon-box" style="color: #00a8e1;"><i class="fa-brands fa-amazon"></i></div>
-                    <h3>Prime Video</h3>
-                </div>
-                <ul>
-                    <li><i class="fa-solid fa-check"></i> 6 Months Plan</li>
-                    <li><i class="fa-solid fa-check"></i> Private Profile</li>
-                    <li><i class="fa-solid fa-check"></i> 4K UHD Support</li>
-                </ul>
-                <div class="price-row">
-                    <div class="price-tag">$6.00</div>
-                    <a href="https://wa.me/12832219723?text=Hi%20Digital%20Apex,%20I%20want%20Amazon%20Prime%20Video%206%20Months." class="buy-btn">Buy Now</a>
-                </div>
+                <div class="card-top"><div class="icon-box" style="color: #00a8e1;"><i class="fa-brands fa-amazon"></i></div><h3>Prime Video</h3></div>
+                <ul><li><i class="fa-solid fa-check"></i> 6 Months Plan</li><li><i class="fa-solid fa-check"></i> 4K UHD Support</li></ul>
+                <div class="price-row"><div class="price-tag">$6.00</div><button class="buy-btn" onclick="initiateBuyProcess('Prime Video 6 Months', '6.00')">Buy Now</button></div>
             </div>
 
             <!-- GitHub Edu -->
             <div class="card">
-                <div class="card-top">
-                    <div class="icon-box"><i class="fa-brands fa-github"></i></div>
-                    <h3>GitHub Edu</h3>
-                </div>
-                <ul>
-                    <li><i class="fa-solid fa-check"></i> Student Pack</li>
-                    <li><i class="fa-solid fa-check"></i> Copilot Access</li>
-                    <li><i class="fa-solid fa-check"></i> DigitalOcean Credit</li>
-                </ul>
-                <div class="price-row">
-                    <div class="price-tag">$5.00</div>
-                    <a href="https://wa.me/12832219723?text=Hi%20Digital%20Apex,%20I%20want%20GitHub%20Student%20Panel." class="buy-btn">Buy Now</a>
-                </div>
+                <div class="card-top"><div class="icon-box"><i class="fa-brands fa-github"></i></div><h3>GitHub Edu</h3></div>
+                <ul><li><i class="fa-solid fa-check"></i> Student Pack</li><li><i class="fa-solid fa-check"></i> Copilot Access</li></ul>
+                <div class="price-row"><div class="price-tag">$5.00</div><button class="buy-btn" onclick="initiateBuyProcess('GitHub Student Pack', '5.00')">Buy Now</button></div>
             </div>
 
-            <!-- Canva Admin -->
+            <!-- Canva Admin (Fixed Logo) -->
             <div class="card">
                 <div class="card-top">
-                    <div class="icon-box" style="color: #00c4cc;"><i class="fa-solid fa-palette"></i></div>
+                    <div class="icon-box">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Canva_icon_2021.svg/1024px-Canva_icon_2021.svg.png" class="logo-img-fix" alt="Canva">
+                    </div>
                     <h3>Canva Admin</h3>
                 </div>
-                <ul>
-                    <li><i class="fa-solid fa-check"></i> Admin Panel</li>
-                    <li><i class="fa-solid fa-check"></i> Add 500 Members</li>
-                    <li><i class="fa-solid fa-check"></i> Lifetime Warranty</li>
-                </ul>
-                <div class="price-row">
-                    <div class="price-tag">$7.00</div>
-                    <a href="https://wa.me/12832219723?text=Hi%20Digital%20Apex,%20I%20want%20Canva%20Admin%20Panel." class="buy-btn">Buy Now</a>
-                </div>
+                <ul><li><i class="fa-solid fa-check"></i> Admin Panel</li><li><i class="fa-solid fa-check"></i> Add 500 Members</li></ul>
+                <div class="price-row"><div class="price-tag">$7.00</div><button class="buy-btn" onclick="initiateBuyProcess('Canva Admin Panel', '7.00')">Buy Now</button></div>
             </div>
 
-            <!-- ChatGPT -->
+            <!-- ChatGPT (Fixed Logo) -->
             <div class="card">
                 <span class="badge">Hot</span>
                 <div class="card-top">
-                    <div class="icon-box" style="color: #10a37f;"><i class="fa-solid fa-robot"></i></div>
+                    <div class="icon-box">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" class="logo-img-fix" alt="ChatGPT">
+                    </div>
                     <h3>ChatGPT Plus</h3>
                 </div>
-                <ul>
-                    <li><i class="fa-solid fa-check"></i> GPT-5.3 Model</li>
-                    <li><i class="fa-solid fa-check"></i> DALL·E 3 Access</li>
-                </ul>
-                <div class="price-row">
-                    <div class="price-tag">$10.00</div>
-                    <a href="https://wa.me/12832219723?text=Hi%20Digital%20Apex,%20I%20want%20ChatGPT%20Plus." class="buy-btn">Buy Now</a>
-                </div>
+                <ul><li><i class="fa-solid fa-check"></i> GPT-5.3 Model</li><li><i class="fa-solid fa-check"></i> DALL·E 3 Access</li></ul>
+                <div class="price-row"><div class="price-tag">$10.00</div><button class="buy-btn" onclick="initiateBuyProcess('ChatGPT Plus', '10.00')">Buy Now</button></div>
             </div>
             
              <!-- Netflix -->
              <div class="card">
                 <div class="card-top">
-                    <!-- Netflix Logo Ensured -->
-                    <div class="icon-box" style="color: #e50914;"><i class="fa-brands fa-netflix"></i></div>
+                    <div class="icon-box">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Netflix-new-icon.png/240px-Netflix-new-icon.png" class="logo-img-fix" alt="Netflix">
+                    </div>
                     <h3>Netflix</h3>
                 </div>
-                <ul>
-                    <li><i class="fa-solid fa-check"></i> 1 Month Shared</li>
-                    <li><i class="fa-solid fa-check"></i> Premium Ultra HD</li>
-                </ul>
-                <div class="price-row">
-                    <div class="price-tag">$3.00</div>
-                    <a href="https://wa.me/12832219723?text=Hi%20Digital%20Apex,%20I%20want%20Netflix%204K." class="buy-btn">Buy Now</a>
-                </div>
+                <ul><li><i class="fa-solid fa-check"></i> 1 Month Shared</li><li><i class="fa-solid fa-check"></i> Premium Ultra HD</li></ul>
+                <div class="price-row"><div class="price-tag">$3.00</div><button class="buy-btn" onclick="initiateBuyProcess('Netflix 4K', '3.00')">Buy Now</button></div>
             </div>
 
              <!-- LinkedIn -->
              <div class="card">
-                <div class="card-top">
-                    <div class="icon-box" style="color: #0077b5;"><i class="fa-brands fa-linkedin"></i></div>
-                    <h3>LinkedIn Premium</h3>
-                </div>
-                <ul>
-                    <li><i class="fa-solid fa-check"></i> 12 Month Career Plan</li>
-                    <li><i class="fa-solid fa-check"></i> Career Insights</li>
-                </ul>
-                <div class="price-row">
-                    <div class="price-tag">$15.00</div>
-                    <a href="https://wa.me/12832219723?text=Hi%20Digital%20Apex,%20I%20want%20LinkedIn%20Premium%20Career%20Plan." class="buy-btn">Buy Now</a>
-                </div>
+                <div class="card-top"><div class="icon-box" style="color: #0077b5;"><i class="fa-brands fa-linkedin"></i></div><h3>LinkedIn Premium</h3></div>
+                <ul><li><i class="fa-solid fa-check"></i> 12 Month Career Plan</li><li><i class="fa-solid fa-check"></i> Career Insights</li></ul>
+                <div class="price-row"><div class="price-tag">$15.00</div><button class="buy-btn" onclick="initiateBuyProcess('LinkedIn Premium', '15.00')">Buy Now</button></div>
             </div>
-
         </div>
 
-        <!-- SPACER -->
-        <div style="height: 50px;"></div>
+        <div style="height: 60px;"></div>
 
         <!-- VIRTUAL NUMBERS -->
-        <div class="section-header">
-            <div class="section-line" style="background: var(--accent);"></div>
-            <div>
-                <h2>Virtual Numbers (OTP)</h2>
-                <p>Non-VoIP numbers for verification.</p>
-            </div>
-        </div>
-
-        <!-- Country Bar -->
+        <div class="section-header"><h2>Virtual Numbers (OTP)</h2><p>Non-VoIP numbers for verification.</p></div>
         <div class="country-bar">
-            <span class="country-flag">🇺🇸 USA</span>
-            <span class="country-flag">🇬🇧 UK</span>
-            <span class="country-flag">🇨🇦 Canada</span>
-            <span class="country-flag">🇦🇺 Australia</span>
-            <span class="country-flag">🇩🇪 Germany</span>
-            <span class="country-flag">🇫🇷 France</span>
-            <span class="country-flag">🌎 150+ More</span>
+            <span class="country-flag">🇺🇸 USA</span><span class="country-flag">🇬🇧 UK</span><span class="country-flag">🇨🇦 Canada</span><span class="country-flag">🇦🇺 Australia</span><span class="country-flag">🇩🇪 Germany</span><span class="country-flag">🇫🇷 France</span>
         </div>
-
         <div class="grid app-grid">
-            <!-- Telegram -->
-            <div class="card">
-                <i class="fa-brands fa-telegram icon-box" style="color: #0088cc;"></i>
-                <h4>Telegram</h4>
-                <a href="https://wa.me/12832219723?text=Digital%20Apex:%20I%20need%20Telegram%20Number" class="buy-btn">Buy Now</a>
-            </div>
-
-            <!-- WhatsApp -->
-            <div class="card">
-                <i class="fa-brands fa-whatsapp icon-box" style="color: #25d366;"></i>
-                <h4>WhatsApp</h4>
-                <a href="https://wa.me/12832219723?text=Digital%20Apex:%20I%20need%20WhatsApp%20Number" class="buy-btn">Buy Now</a>
-            </div>
-
-            <!-- Google -->
-            <div class="card">
-                <i class="fa-brands fa-google icon-box" style="color: #fff;"></i>
-                <h4>Google</h4>
-                <a href="https://wa.me/12832219723?text=Digital%20Apex:%20I%20need%20Google%20Number" class="buy-btn">Buy Now</a>
-            </div>
-
-            <!-- Facebook -->
-            <div class="card">
-                <i class="fa-brands fa-facebook icon-box" style="color: #1877f2;"></i>
-                <h4>Facebook</h4>
-                <a href="https://wa.me/12832219723?text=Digital%20Apex:%20I%20need%20Facebook%20Number" class="buy-btn">Buy Now</a>
-            </div>
-
-            <!-- PayPal -->
-            <div class="card">
-                <i class="fa-brands fa-paypal icon-box" style="color: #00457c;"></i>
-                <h4>PayPal</h4>
-                <a href="https://wa.me/12832219723?text=Digital%20Apex:%20I%20need%20PayPal%20Number" class="buy-btn">Buy Now</a>
-            </div>
-
-            <!-- Amazon -->
-            <div class="card">
-                <i class="fa-brands fa-amazon icon-box" style="color: #ff9900;"></i>
-                <h4>Amazon</h4>
-                <a href="https://wa.me/12832219723?text=Digital%20Apex:%20I%20need%20Amazon%20Number" class="buy-btn">Buy Now</a>
-            </div>
-
-             <!-- TikTok -->
-             <div class="card">
-                <i class="fa-brands fa-tiktok icon-box" style="color: #fe2c55;"></i>
-                <h4>TikTok</h4>
-                <a href="https://wa.me/12832219723?text=Digital%20Apex:%20I%20need%20TikTok%20Number" class="buy-btn">Buy Now</a>
-            </div>
-            
-            <!-- Tinder -->
-            <div class="card">
-                <i class="fa-brands fa-fire icon-box" style="color: #fe3c72;"></i>
-                <h4>Tinder</h4>
-                <a href="https://wa.me/12832219723?text=Digital%20Apex:%20I%20need%20Tinder%20Number" class="buy-btn">Buy Now</a>
-            </div>
+            <div class="card"><i class="fa-brands fa-telegram icon-box" style="color: #0088cc;"></i><h4>Telegram</h4><button class="buy-btn" onclick="initiateBuyProcess('Telegram OTP', 'Varies')">Buy Now</button></div>
+            <div class="card"><i class="fa-brands fa-whatsapp icon-box" style="color: #25d366;"></i><h4>WhatsApp</h4><button class="buy-btn" onclick="initiateBuyProcess('WhatsApp OTP', 'Varies')">Buy Now</button></div>
+            <div class="card"><i class="fa-brands fa-google icon-box" style="color: var(--text-main);"></i><h4>Google</h4><button class="buy-btn" onclick="initiateBuyProcess('Google OTP', 'Varies')">Buy Now</button></div>
+            <div class="card"><i class="fa-brands fa-facebook icon-box" style="color: #1877f2;"></i><h4>Facebook</h4><button class="buy-btn" onclick="initiateBuyProcess('Facebook OTP', 'Varies')">Buy Now</button></div>
         </div>
         
         <div style="height: 60px;"></div>
 
-        <!-- CONTACT US FORM (FIXED: NO REDIRECT) -->
-        <div class="section-header">
-            <div class="section-line" style="background: #fff;"></div>
-            <div><h2>Contact Us</h2><p>Send us a direct message via Email.</p></div>
-        </div>
-
+        <!-- CONTACT US FORM -->
+        <div class="section-header"><h2>Contact Us</h2><p>Send us a direct message via Email.</p></div>
         <div class="contact-section">
-            <!-- Hidden Success Message -->
             <div class="success-message" id="formSuccessMessage">
-                <i class="fa-solid fa-circle-check"></i>
-                <h3>Thank You!</h3>
-                <p>Your message has been sent successfully. We will contact you shortly.</p>
+                <i class="fa-solid fa-circle-check"></i><h3>Thank You!</h3><p>Your message has been sent successfully. We will contact you shortly.</p>
             </div>
-
-            <!-- Form -->
             <form id="contactForm">
-                <!-- IMPORTANT: FormSubmit Endpoint for AJAX -->
                 <input type="hidden" name="_subject" value="New Inquiry from Digital Apex Website">
-                <!-- No _next here because we handle it with JS -->
-
                 <div class="grid" style="gap: 15px;">
-                    <div class="form-group">
-                        <label>Your Name</label>
-                        <input type="text" name="name" class="form-control" placeholder="John Doe" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Your Email</label>
-                        <input type="email" name="email" class="form-control" placeholder="email@example.com" required>
-                    </div>
+                    <div class="form-group"><label>Your Name</label><input type="text" name="name" class="form-control" placeholder="John Doe" required></div>
+                    <div class="form-group"><label>Your Email</label><input type="email" name="email" class="form-control" placeholder="email@example.com" required></div>
                 </div>
-                <div class="form-group">
-                    <label>Message</label>
-                    <textarea name="message" rows="5" class="form-control" placeholder="How can we help you?" required></textarea>
-                </div>
+                <div class="form-group"><label>Message</label><textarea name="message" rows="5" class="form-control" placeholder="How can we help you?" required></textarea></div>
                 <button type="submit" class="submit-btn" id="submitBtn">Send Message</button>
             </form>
         </div>
-
     </div>
 
-    <!-- Footer -->
     <footer>
         <img src="logo.png" alt="Digital Apex Logo" class="footer-logo">
         <p>© 2026 DIGITAL APEX. All rights reserved.</p>
         <div class="footer-links" style="margin-top: 20px;">
-            <a onclick="document.getElementById('privacyModal').style.display='block'">Privacy Policy</a> | 
-            <a onclick="document.getElementById('termsModal').style.display='block'">Terms of Service</a>
+            <a onclick="openModal('privacyModal')">Privacy Policy</a> | <a onclick="openModal('termsModal')">Terms of Service</a>
         </div>
     </footer>
 
-    <!-- PRIVACY POLICY MODAL -->
-    <div id="privacyModal" class="modal">
+    <!-- SIGNUP MODAL -->
+    <div id="signupModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="document.getElementById('privacyModal').style.display='none'">&times;</span>
-            <h2>Privacy Policy</h2>
-            <p>At Digital Apex, your privacy is our priority.</p><br>
-            <p>1. <strong>Data Collection:</strong> We do not collect personal data other than what you provide for order delivery (e.g., email or phone number).</p>
-            <p>2. <strong>Security:</strong> All accounts and numbers provided are secure and private.</p>
-            <p>3. <strong>Sharing:</strong> We do not share your information with third parties.</p>
-            <p>4. <strong>Payments:</strong> All payments are processed securely via encrypted channels.</p>
+            <span class="close" onclick="closeModal('signupModal')">&times;</span>
+            <h2 id="signupTitle">Create Account</h2>
+            <div id="signupStep1">
+                <p style="margin-bottom: 20px; font-size: 0.9rem;">Register to manage your orders.</p>
+                <div id="signupError" class="msg-box msg-error"></div>
+                <form id="signupForm">
+                    <div class="form-group"><label>Full Name</label><input type="text" id="regName" class="form-control" placeholder="Enter your name" required></div>
+                    <div class="form-group"><label>Email Address</label><input type="email" id="regEmail" class="form-control" placeholder="Enter valid email (No Temp Mail)" required></div>
+                    <div class="form-group"><label>Password</label><input type="password" id="regPass" class="form-control" placeholder="Create a password" required></div>
+                    <button type="button" class="submit-btn" id="sendOtpBtn" onclick="sendOTP()">Send OTP Code</button>
+                </form>
+            </div>
+            <div id="signupStep2" style="display: none;">
+                <p style="margin-bottom: 20px; font-size: 0.9rem;">We sent a code to <span id="userEmailSpan" style="color: var(--primary);"></span></p>
+                <div class="form-group"><label>Enter 4-Digit Code</label><input type="text" id="otpCodeInput" class="form-control" placeholder="XXXX" style="text-align: center; letter-spacing: 5px; font-size: 1.2rem;"></div>
+                <button type="button" class="submit-btn" onclick="verifyOTP()">Verify & Create</button>
+            </div>
+            <div id="signupStep3" style="display: none; text-align: center;">
+                <i class="fa-solid fa-circle-check" style="font-size: 3rem; color: #22c55e; margin-bottom: 15px;"></i><h3>Account Created!</h3>
+            </div>
         </div>
     </div>
 
-    <!-- TERMS MODAL -->
-    <div id="termsModal" class="modal">
+    <!-- BUY OPTIONS MODAL (Step 1) -->
+    <div id="buyOptionsModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="document.getElementById('termsModal').style.display='none'">&times;</span>
-            <h2>Terms of Service</h2>
-            <p>By purchasing from Digital Apex, you agree to the following:</p><br>
-            <p>1. <strong>Warranty:</strong> Warranties are valid only for the duration specified on the product card.</p>
-            <p>2. <strong>Delivery:</strong> Delivery is instant or within 24 hours depending on stock availability.</p>
-            <p>3. <strong>Refunds:</strong> Refunds are only provided if the product is non-functional and cannot be replaced.</p>
-            <p>4. <strong>Usage:</strong> Any misuse of the accounts provided will result in warranty voidance.</p>
+            <span class="close" onclick="closeModal('buyOptionsModal')">&times;</span>
+            <h2>Choose Purchase Method</h2>
+            <p style="margin-bottom: 25px;">How would you like to buy <span id="optProductName" style="color: var(--primary); font-weight: 700;">Product</span>?</p>
+            <div class="buy-option-card" onclick="buyDirectWhatsApp()"><div class="buy-option-icon" style="color: #25d366;"><i class="fa-brands fa-whatsapp"></i></div><div style="flex-grow: 1;"><h3 style="font-size: 1.1rem; margin-bottom: 5px; color: var(--text-main);">Buy via WhatsApp</h3><p style="font-size: 0.85rem; color: var(--text-muted);">Chat directly with admin.</p></div><i class="fa-solid fa-chevron-right" style="color: var(--text-muted);"></i></div>
+            <div class="buy-option-card" onclick="openPaymentGateway()"><div class="buy-option-icon" style="color: var(--primary);"><i class="fa-solid fa-credit-card"></i></div><div style="flex-grow: 1;"><h3 style="font-size: 1.1rem; margin-bottom: 5px; color: var(--text-main);">Pay via Gateway</h3><p style="font-size: 0.85rem; color: var(--text-muted);">Easypaisa / JazzCash.</p></div><i class="fa-solid fa-chevron-right" style="color: var(--text-muted);"></i></div>
         </div>
     </div>
 
-    <!-- JS for Modals & Form Handling -->
+    <!-- PAYMENT GATEWAY MODAL (Step 2) -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('paymentModal')">&times;</span>
+            <h2>Complete Payment</h2>
+            <p style="margin-bottom: 20px;">Paying: <span id="payProductPrice" style="color: var(--primary); font-weight: 700;">$0.00</span></p>
+
+            <!-- Error Message -->
+            <div id="payErrorBox" class="msg-box msg-error"></div>
+
+            <!-- Verification Loader -->
+            <div id="verificationScreen" class="verification-loader">
+                <div class="loader-spinner"></div>
+                <h3 style="color: var(--text-main);">Verifying Transaction...</h3>
+                <div class="verify-steps">
+                    <div class="verify-step" id="step1"><i class="fa-solid fa-circle-notch"></i> Checking Gateway...</div>
+                    <div class="verify-step" id="step2"><i class="fa-solid fa-magnifying-glass"></i> Validating ID Format...</div>
+                    <div class="verify-step" id="step3"><i class="fa-solid fa-check"></i> Verification Successful!</div>
+                </div>
+            </div>
+
+            <div id="paymentMainContent">
+                <p style="margin-bottom: 10px; font-size: 0.9rem; color: var(--text-muted);">Select Payment Method:</p>
+                <div class="payment-methods-grid">
+                    <div class="payment-method-card" onclick="selectPayment('Easypaisa', '03377755004', 'Muhammad Adeel')">
+                        <div class="pm-logo" style="color: #26b976;">Easypaisa</div>
+                    </div>
+                    <div class="payment-method-card" onclick="selectPayment('JazzCash', '03377755004', 'Muhammad Adeel')">
+                        <div class="pm-logo" style="color: #e30425;">JazzCash</div>
+                    </div>
+                </div>
+
+                <div id="paymentDetailsBox" class="payment-details-box">
+                    <p>Send Amount to:</p>
+                    <div class="account-number" onclick="copyToClipboard(this.innerText)">03377755004</div>
+                    <div class="account-title" id="accTitleDisplay">Account Title: Muhammad Adeel</div>
+                    <span class="copy-hint">(Click number to copy)</span>
+                </div>
+
+                <form id="paymentForm">
+                    <div class="form-group">
+                        <label>Sender Mobile Number</label>
+                        <input type="text" id="paySender" class="form-control" placeholder="03XXXXXXXXX (11 digits)" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Transaction ID (Trx ID)</label>
+                        <input type="text" id="payTrx" class="form-control" placeholder="e.g. 8483XXXXXX (11+ digits)" required>
+                    </div>
+                    <button type="submit" class="submit-btn" id="paySubmitBtn">Verify Payment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- CAPCUT MODAL -->
+    <div id="capcutModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('capcutModal')">&times;</span>
+            <h2>Select CapCut Plan</h2>
+            <div class="plan-option-btn" onclick="initiateBuyProcess('CapCut Pro 1 Month', '1.00'); closeModal('capcutModal');"><span>1 Month Access</span><span style="color: var(--primary);">$1.00</span></div>
+            <div class="plan-option-btn" style="border-color: var(--primary);" onclick="initiateBuyProcess('CapCut Pro 6 Months', '5.00'); closeModal('capcutModal');"><span>6 Months Access</span><span style="color: var(--primary);">$5.00</span></div>
+        </div>
+    </div>
+
+    <div id="privacyModal" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('privacyModal')">&times;</span><h2>Privacy Policy</h2><p>Data secured.</p></div></div>
+    <div id="termsModal" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('termsModal')">&times;</span><h2>Terms of Service</h2><p>No refunds.</p></div></div>
+
     <script>
-        // Modal Logic
-        window.onclick = function(event) {
-            if (event.target == document.getElementById('privacyModal')) {
-                document.getElementById('privacyModal').style.display = "none";
-            }
-            if (event.target == document.getElementById('termsModal')) {
-                document.getElementById('termsModal').style.display = "none";
-            }
+        function toggleTheme() { document.body.classList.toggle('light-mode'); const icon = document.getElementById('themeIcon'); icon.classList.toggle('fa-sun'); icon.classList.toggle('fa-moon'); }
+        function openModal(id) { document.getElementById(id).style.display = 'block'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        window.onclick = function(e) { if(e.target.classList.contains('modal')) e.target.style.display = 'none'; }
+
+        let currentProduct = "", currentPrice = "", selectedMethod = "";
+
+        function initiateBuyProcess(product, price) {
+            currentProduct = product; currentPrice = price;
+            document.getElementById('optProductName').innerText = product;
+            openModal('buyOptionsModal');
         }
 
-        // AJAX Form Logic (Prevents Redirect)
-        const form = document.getElementById('contactForm');
-        const successMessage = document.getElementById('formSuccessMessage');
-        const submitBtn = document.getElementById('submitBtn');
+        function buyDirectWhatsApp() {
+            const text = `Hi Digital Apex, I want to buy ${currentProduct} ($${currentPrice}).`;
+            window.location.href = `https://wa.me/12832219723?text=${encodeURIComponent(text)}`;
+        }
 
-        form.addEventListener('submit', function(e) {
-            e.preventDefault(); // Stop standard submission
-            
-            // Show Loading State
-            submitBtn.innerText = "Sending...";
-            submitBtn.style.opacity = "0.7";
+        function openPaymentGateway() {
+            closeModal('buyOptionsModal');
+            document.getElementById('payProductPrice').innerText = "$" + currentPrice;
+            document.getElementById('paymentMainContent').style.display = 'block';
+            document.getElementById('verificationScreen').style.display = 'none';
+            document.getElementById('paymentDetailsBox').style.display = 'none';
+            document.getElementById('payErrorBox').style.display = 'none';
+            document.getElementById('paySender').value = '';
+            document.getElementById('payTrx').value = '';
+            openModal('paymentModal');
+        }
 
-            // Prepare Data as JSON (Crucial for FormSubmit AJAX)
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData.entries());
-            const json = JSON.stringify(data);
+        function selectPayment(method, number, title) {
+            selectedMethod = method;
+            document.querySelectorAll('.payment-method-card').forEach(c => c.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            const details = document.getElementById('paymentDetailsBox');
+            details.style.display = 'block';
+            details.querySelector('.account-number').innerText = number;
+            document.getElementById('accTitleDisplay').innerText = "Account Title: " + title;
+        }
 
-            // Send to FormSubmit via AJAX with proper headers
-            fetch("https://formsubmit.co/ajax/adeel126304@gmail.com", {
-                method: "POST",
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: json
-            })
-            .then(response => response.json())
-            .then(data => {
-                // On Success: Hide Form, Show Message
-                form.style.display = "none";
-                successMessage.style.display = "block";
-                console.log(data);
-            })
-            .catch(error => {
-                // Error Fallback
-                console.error('Error:', error);
-                submitBtn.innerText = "Error. Try again.";
-            });
+        function copyToClipboard(text) { navigator.clipboard.writeText(text); alert("Number copied: " + text); }
+
+        // --- STRICT VERIFICATION LOGIC ---
+        const payForm = document.getElementById('paymentForm');
+        payForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const sender = document.getElementById('paySender').value.trim();
+            const trx = document.getElementById('payTrx').value.trim();
+            const errorBox = document.getElementById('payErrorBox');
+            errorBox.style.display = 'none';
+
+            if(!selectedMethod) {
+                errorBox.innerText = "Please select a Payment Method (Easypaisa/JazzCash).";
+                errorBox.style.display = 'block';
+                return;
+            }
+
+            // 1. Strict Regex for Phone Number (Pakistan Format)
+            const phoneRegex = /^(03)[0-9]{9}$/;
+            if (!phoneRegex.test(sender)) {
+                errorBox.innerText = "Invalid Sender Number. Must start with 03 and have 11 digits.";
+                errorBox.style.display = 'block';
+                return;
+            }
+
+            // 2. Strict Regex for Transaction ID (Numeric, 11-12+ digits)
+            // Accepts at least 11 digits. Cannot be short "123"
+            const trxRegex = /^[0-9]{11,}$/;
+            if (!trxRegex.test(trx)) {
+                errorBox.innerText = "Invalid Transaction ID. Trx ID must be at least 11 digits (only numbers).";
+                errorBox.style.display = 'block';
+                return;
+            }
+
+            // If Passed, Show Animation
+            document.getElementById('paymentMainContent').style.display = 'none';
+            document.getElementById('verificationScreen').style.display = 'block';
+
+            setTimeout(() => { document.getElementById('step1').classList.add('active'); }, 500);
+            setTimeout(() => { 
+                document.getElementById('step1').classList.replace('active', 'done');
+                document.getElementById('step2').classList.add('active');
+            }, 1500);
+            setTimeout(() => { 
+                document.getElementById('step2').classList.replace('active', 'done');
+                document.getElementById('step3').classList.add('active');
+                document.querySelector('.loader-spinner').style.borderColor = "#22c55e";
+                document.querySelector('.loader-spinner').style.borderLeftColor = "#22c55e";
+            }, 3000);
+
+            // Redirect to YOUR WhatsApp
+            setTimeout(() => {
+                const msg = `*PAYMENT VERIFIED*\n\n📦 Product: ${currentProduct}\n💰 Amount: $${currentPrice}\n🏦 Method: ${selectedMethod}\n👤 Sender: ${sender}\n🆔 Trx ID: ${trx}\n\nPlease check verify and send credentials.`;
+                // Redirecting to YOUR WhatsApp (+12832219723)
+                window.location.href = `https://wa.me/12832219723?text=${encodeURIComponent(msg)}`;
+            }, 4000);
         });
-    </script>
 
+        // Contact Form
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn'); btn.innerText = "Sending...";
+            setTimeout(() => {
+                document.getElementById('contactForm').style.display = 'none';
+                document.getElementById('formSuccessMessage').style.display = 'block';
+            }, 1500);
+        });
+
+        // OTP
+        function sendOTP() {
+            const email = document.getElementById('regEmail').value;
+            if(!email) return alert("Enter email");
+            if(["temp-mail.org", "yopmail.com"].some(d => email.includes(d))) return alert("No temp mail");
+            document.getElementById('signupStep1').style.display = 'none';
+            document.getElementById('signupStep2').style.display = 'block';
+            document.getElementById('userEmailSpan').innerText = email;
+        }
+        function verifyOTP() {
+            document.getElementById('signupStep2').style.display = 'none';
+            document.getElementById('signupStep3').style.display = 'block';
+            setTimeout(() => closeModal('signupModal'), 2000);
+        }
+    </script>
 </body>
 </html>
